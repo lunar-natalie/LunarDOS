@@ -1,6 +1,42 @@
-Operating System
+# Operating System
 
-# License
+## Build Requirements
+
+- CMake >= 2.27
+
+Toolchain for target platform:
+- GCC >= 8.1.0
+- Binutils
+
+Bootable disk image for x86 systems:
+- GRUB 2
+- xorriso
+
+## Supported Platforms
+
+| Platform   | Architecture | Toolchain                          |
+|------------|--------------|------------------------------------|
+| `i686-elf` | `i386`       | `i686-elf-gcc` `i686-elf-binutils` |
+
+## Building
+
+```shell
+mkdir -p build && \
+cd build && \
+cmake .. --preset <PLATFORM> && \
+cd default && \
+cmake --build .
+```
+
+## Testing
+
+Requires `qemu`:
+
+```shell
+qemu-system-<ARCH> -cdrom system.iso
+```
+
+## License
 
 Copyright (c) 2023 Natalie Wiggins.
 
