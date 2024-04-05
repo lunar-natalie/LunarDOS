@@ -1,0 +1,50 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 27,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "default",
+      "displayName": "Default Config",
+      "description": "Default build using the Ninja generator",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/default"
+    },
+    {
+      "name": "i686-elf",
+      "inherits": "default",
+      "displayName": "i686-elf",
+      "description": "Build for the i686-elf platform",
+      "cacheVariables": {
+        "TARGET_PLATFORM": {
+          "type": "STRING",
+          "value": "i686-elf"
+        }
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "default",
+      "configurePreset": "default"
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "default",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "default"
+        },
+        {
+          "type": "build",
+          "name": "default"
+        }
+      ]
+    }
+  ]
+}
