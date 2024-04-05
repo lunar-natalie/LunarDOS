@@ -3,4 +3,5 @@
 target_sources(Kernel PRIVATE
         start.s
         main.c
+        vga.c
 )

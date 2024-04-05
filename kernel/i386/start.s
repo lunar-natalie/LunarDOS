@@ -1,11 +1,7 @@
-/*
- * start.s
- * Multiboot v1 compatible bootstrap assembly
- *
- * Copyright (c) 2023 Natalie Wiggins <islifepeachy@outlook.com>
- *
+/* Multiboot v1-compatible kernel bootstrap assembly
+ * Copyright (c) 2024 Natalie Wiggins. All rights reserved.
  * SPDX-License-Identifier: GPL-3.0-or-later
- */
+*/
 
 /* Multiboot constants */
 .set ALIGN,	1 << 0

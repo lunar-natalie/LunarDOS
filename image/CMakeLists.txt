@@ -1,4 +1,4 @@
-# Creates a bootable image
+# Bootable disk image
 
 find_program(GRUB_MKRESCUE "grub-mkrescue")
 find_program(XORRISO "xorriso")
