@@ -57,7 +57,7 @@ void vga_scroll(vga_t *vga)
     // Copy every character in each row to the same column in the next row, until the final row has been reached.
     for (uint8_t y = 0; y < VGA_HEIGHT - 1; ++y) {
         memcpy((void *)(vga->buffer + (y * VGA_WIDTH)),
-               (void *)(vga->buffer + ((y + 1) * VGA_WIDTH)), VGA_WIDTH);
+               (void *)(vga->buffer + ((y + 1) * VGA_WIDTH)), VGA_WIDTH * sizeof(uint16_t));
     }
 
     // Clear the last row
