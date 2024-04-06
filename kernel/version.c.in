@@ -1,5 +1,6 @@
-// Configured by CMake
+// clang-format off
 
-#include "kernel/version.h"
+#include <kernel/version.h>
 
-static const version_t KERNEL_VERSION = {.major = @PROJECT_VERSION_MAJOR@, .minor = @PROJECT_VERSION_MINOR@, .patch = @PROJECT_VERSION_PATCH@};
+static const version_t KERNEL_VERSION = {
+    .major = @PROJECT_VERSION_MAJOR@, .minor = @PROJECT_VERSION_MINOR@, .patch = @PROJECT_VERSION_PATCH@};

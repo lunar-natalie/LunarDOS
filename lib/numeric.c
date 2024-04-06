@@ -10,7 +10,8 @@ void itoa(int input, char *buffer, int radix)
     // TODO
 }
 
-int digits(int n) {
+int digits(int n)
+{
     int result = 1;
     if (n < 0) {
         n = (n == INT_MIN) ? INT_MAX : -n;

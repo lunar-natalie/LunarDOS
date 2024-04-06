@@ -3,6 +3,7 @@ BasedOnStyle: LLVM
 
 AlignConsecutiveAssignments: Consecutive
 AlignConsecutiveDeclarations: Consecutive
+AlignConsecutiveBitFields: Consecutive
 AllowShortFunctionsOnASingleLine: None
 BinPackArguments: false
 BinPackParameters: true
