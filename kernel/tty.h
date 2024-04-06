@@ -1,3 +1,4 @@
+// Terminal driver
 // Copyright (c) 2024 Natalie Wiggins. All rights reserved.
 // SPDX-License-Identifier: GPL-3.0-only
 
@@ -5,5 +6,6 @@
 
 #include <stddef.h>
 
-size_t strlen(const char *str);
-void  *memcpy(void *restrict dest, const void *restrict src, size_t count);
+void   tty_init(void);
+void   tty_putc(char ch);
+size_t tty_puts(const char *str);
