@@ -2,16 +2,16 @@
 
 ## Build Requirements
 
-- CMake >= 2.27
+- [CMake](https://cmake.org/) >= 2.27
 
 Toolchain for target platform:
-- GCC >= 8.1.0
-- Binutils
+- [GCC](https://gcc.gnu.org/) >= 8.1.0
+- [GNU Binutils](https://www.gnu.org/software/binutils/)
 
 Bootable disk image for x86 systems:
 - [GRUB 2](https://git.savannah.gnu.org/git/grub.git) command-line tools
   - Build dependencies: `autoconf` `automake` `gawk`
-- xorriso
+- [GNU xorriso](https://www.gnu.org/software/xorriso/)
 
 ## Supported Platforms
 
@@ -31,7 +31,7 @@ cmake --build .
 
 ## Testing
 
-Requires `qemu`:
+Requires [QEMU](https://www.qemu.org/):
 
 ```shell
 qemu-system-<ARCH> -cdrom system.iso
