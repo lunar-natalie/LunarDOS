@@ -4,10 +4,10 @@
 
 #include "string.h"
 
-size_t strlen(const char *s)
+size_t strlen(const char *str)
 {
     size_t len = 0;
-    while (s[len]) {
+    while (str[len]) {
         ++len;
     }
     return len;

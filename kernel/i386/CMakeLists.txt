@@ -1,7 +1,8 @@
 # Kernel sources for i386
 
 target_sources(Kernel PRIVATE
-        start.s
         main.c
+        start.s
+        tty.c
         vga.c
 )

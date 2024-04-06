@@ -1,4 +1,4 @@
-// VGA graphics driver
+// Text mode graphics driver
 // Copyright (c) 2024 Natalie Wiggins. All rights reserved.
 // SPDX-License-Identifier: GPL-3.0-only
 
@@ -23,24 +23,24 @@ void vga_init(vga_t *vga)
     }
 }
 
-void vga_put_entry(vga_t *vga, char c, uint8_t color, uint8_t x, uint8_t y)
+void vga_put_entry(vga_t *vga, char ch, uint8_t color, uint8_t x, uint8_t y)
 {
-    vga->buffer[vga_index(x, y)] = vga_entry(c, color);
+    vga->buffer[vga_index(x, y)] = vga_entry(ch, color);
 }
 
-void vga_put_char(vga_t *vga, char c)
+void vga_put_char(vga_t *vga, char ch)
 {
-    if (c == '\n') {
-        vga_next_line(vga);
+    if (ch == '\n') {
+        vga_newline(vga);
     } else {
-        vga_put_entry(vga, c, vga->color, vga->column, vga->row);
+        vga_put_entry(vga, ch, vga->color, vga->column, vga->row);
         if (++vga->column == VGA_WIDTH) {
-            vga_next_line(vga);
+            vga_newline(vga);
         }
     }
 }
 
-void vga_next_line(vga_t *vga)
+void vga_newline(vga_t *vga)
 {
     vga->column = 0;
     if (vga->row < VGA_HEIGHT - 1) {
@@ -66,9 +66,9 @@ void vga_scroll(vga_t *vga)
     }
 }
 
-void vga_write(vga_t *vga, const char *s, size_t length)
+void vga_write(vga_t *vga, const char *str, size_t length)
 {
     for (size_t i = 0; i < length; ++i) {
-        vga_put_char(vga, s[i]);
+        vga_put_char(vga, str[i]);
     }
 }

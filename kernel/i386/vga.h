@@ -51,8 +51,8 @@ static inline uint16_t vga_index(uint8_t x, uint8_t y)
 }
 
 void vga_init(vga_t *vga);
-void vga_put_entry(vga_t *vga, char c, uint8_t color, uint8_t x, uint8_t y);
-void vga_put_char(vga_t *vga, char c);
-void vga_next_line(vga_t *vga);
+void vga_put_entry(vga_t *vga, char ch, uint8_t color, uint8_t x, uint8_t y);
+void vga_put_char(vga_t *vga, char ch);
+void vga_newline(vga_t *vga);
 void vga_scroll(vga_t *vga);
-void vga_write(vga_t *vga, const char *s, size_t length);
+void vga_write(vga_t *vga, const char *str, size_t length);
