@@ -1,3 +1,4 @@
+// Text mode graphics driver
 // Copyright (c) 2024 Natalie Wiggins. All rights reserved.
 // SPDX-License-Identifier: GPL-3.0-only
 
@@ -6,15 +7,19 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#define VGA_WIDTH  80
-#define VGA_HEIGHT 25
+typedef uint8_t vga_color_t;
+typedef uint16_t vga_entry_t;
+typedef vga_entry_t vga_index_t;
 
 typedef struct {
-    size_t     row;
-    size_t     column;
-    uint8_t    color;
-    uint16_t  *buffer;
+    vga_index_t row;
+    vga_index_t column;
+    vga_color_t color;
+    vga_entry_t *buffer;
 } vga_t;
+
+static const vga_index_t VGA_WIDTH;
+static const vga_index_t VGA_HEIGHT;
 
 enum vga_color {
     VGA_COLOR_BLACK         = 0,
@@ -35,24 +40,26 @@ enum vga_color {
     VGA_COLOR_WHITE         = 15,
 };
 
-static inline uint8_t vga_color(enum vga_color fg, enum vga_color bg)
+static inline vga_color_t vga_color(enum vga_color fg, enum vga_color bg)
 {
-    return (uint8_t)(fg | bg << 4);
+    return (vga_color_t)(fg | bg << 4);
 }
 
-static inline uint16_t vga_entry(unsigned char data, uint8_t color)
+static inline vga_entry_t vga_entry(unsigned char data, vga_color_t color)
 {
-    return (uint16_t)data | (uint16_t)color << 8;
+    return (vga_entry_t)data | (vga_entry_t)color << 8;
 }
 
-static inline uint16_t vga_index(uint8_t x, uint8_t y)
+static inline vga_index_t vga_index(vga_index_t x, vga_index_t y)
 {
     return x + (y * VGA_WIDTH);
 }
 
 void vga_init(vga_t *vga);
-void vga_put_entry(vga_t *vga, char ch, uint8_t color, uint8_t x, uint8_t y);
-void vga_put_char(vga_t *vga, char ch);
-void vga_newline(vga_t *vga);
-void vga_scroll(vga_t *vga);
-void vga_write(vga_t *vga, const char *str, size_t length);
+
+void vga_write_ch(vga_t *vga, char ch);
+void vga_write_str(vga_t *vga, const char *str, size_t length);
+
+void vga_put_entry(vga_t *vga, char ch, vga_color_t color, vga_index_t x, vga_index_t y);
+void vga_next_line(vga_t *vga);
+void vga_scroll_line(vga_t *vga);

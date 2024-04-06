@@ -1,4 +1,3 @@
-// Terminal driver
 // Copyright (c) 2024 Natalie Wiggins. All rights reserved.
 // SPDX-License-Identifier: GPL-3.0-only
 
@@ -18,6 +17,6 @@ void tty_init(void)
 int tty_puts(const char *str)
 {
     size_t len = strlen(str);
-    vga_write(&vga, str, len);
+    vga_write_str(&vga, str, len);
     return (int)len;
 }
