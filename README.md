@@ -39,7 +39,7 @@ qemu-system-<ARCH> -cdrom system.iso
 
 ## License
 
-Copyright (c) 2023 Natalie Wiggins.
+Copyright (c) 2023 Natalie Wiggins. All rights reserved.
 
 This program is free software: you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
