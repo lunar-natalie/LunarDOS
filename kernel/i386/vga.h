@@ -7,14 +7,14 @@
 #include <stddef.h>
 #include <stdint.h>
 
-typedef uint8_t vga_color_t;
-typedef uint16_t vga_entry_t;
+typedef uint8_t     vga_color_t;
+typedef uint16_t    vga_entry_t;
 typedef vga_entry_t vga_index_t;
 
 typedef struct {
-    vga_index_t row;
-    vga_index_t column;
-    vga_color_t color;
+    vga_index_t  row;
+    vga_index_t  column;
+    vga_color_t  color;
     vga_entry_t *buffer;
 } vga_t;
 
