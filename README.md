@@ -10,7 +10,7 @@ Toolchain for target platform:
 
 Bootable disk image for x86 systems:
 - [GRUB 2](https://git.savannah.gnu.org/git/grub.git) command-line tools
-  - Build dependencies: autoconf, automake, GNU awk
+  - Build dependencies: `autoconf` `automake` `gawk`
 - xorriso
 
 ## Supported Platforms
