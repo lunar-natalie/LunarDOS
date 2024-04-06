@@ -9,7 +9,8 @@ Toolchain for target platform:
 - Binutils
 
 Bootable disk image for x86 systems:
-- GRUB 2
+- [GRUB 2](https://git.savannah.gnu.org/git/grub.git) command-line tools
+  - Build dependencies: autoconf, automake, GNU awk
 - xorriso
 
 ## Supported Platforms
