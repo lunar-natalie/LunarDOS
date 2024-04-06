@@ -1,29 +1,29 @@
-/* Stubs for interrupt service routines.
- * Copyright (c) 2024 Natalie Wiggins. All rights reserved.
- * SPDX-License-Identifier: GPL-3.0-or-later */
+// Stubs for interrupt service routines.
+// Copyright (c) 2024 Natalie Wiggins. All rights reserved.
+// SPDX-License-Identifier: GPL-3.0-or-later
 
-.altmacro		/* Enable macro parameters */
+.altmacro		// Enable macro parameters
 
-/* Creates an ISR handler `isr_stub_N` for IRQ N to call the default exception handler. */
+// Creates an ISR handler `isr_stub_N` for IRQ N to call the default exception handler.
 .macro isr_err_stub irq
 .align 4
 .extern kernel_exception_handler
 isr_stub_\irq:
 	pusha
-	cld		/* DF must be clear on function entry */
+	cld		// DF must be clear on function entry
 	call	kernel_exception_handler
 	popa
 	iret
 .endm
 
-/* Creates an empty ISR handler `isr_stub_N` for IRQ N. */
+// Creates an empty ISR handler `isr_stub_N` for IRQ N.
 .macro isr_no_err_stub irq
 .align 4
 isr_stub_\irq:
 	iret
 .endm
 
-/* Places the address of the ISR stub for a given IRQ at the current location. */
+// Places the address of the ISR stub for a given IRQ at the current location.
 .macro isr_stub_addr irq
 	.long isr_stub_\irq
 .endm
@@ -31,7 +31,7 @@ isr_stub_\irq:
 
 .section .data
 
-/* ISR stub table for the IDT */
+// ISR stub table for the IDT
 .global isr_stub_table
 .align 4
 isr_stub_table:
@@ -44,7 +44,7 @@ isr_stub_table:
 
 .section .text
 
-/* Exception ISRs */
+// Exception ISRs
 isr_no_err_stub 0
 isr_no_err_stub 1
 isr_no_err_stub 2
