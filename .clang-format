@@ -1,0 +1,13 @@
+Language: Cpp
+BasedOnStyle: LLVM
+
+AlignConsecutiveAssignments: Consecutive
+AlignConsecutiveDeclarations: Consecutive
+AllowShortFunctionsOnASingleLine: Empty
+BinPackArguments: false
+BinPackParameters: true
+BreakBeforeBraces: Stroustrup
+ColumnLimit: 120
+IndentWidth: 4
+PointerAlignment: Right
+SpaceAfterCStyleCast: false
