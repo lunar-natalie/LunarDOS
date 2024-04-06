@@ -6,8 +6,8 @@
 #include <string.h>
 
 static vga_entry_t *const VGA_BUFFER = (vga_entry_t *)0xb8000;
-static const vga_index_t VGA_WIDTH = 80;
-static const vga_index_t VGA_HEIGHT = 25;
+static const vga_index_t  VGA_WIDTH  = 80;
+static const vga_index_t  VGA_HEIGHT = 25;
 
 void vga_init(vga_t *vga)
 {
@@ -33,7 +33,8 @@ void vga_write_ch(vga_t *vga, char ch)
 {
     if (ch == '\n') {
         vga_next_line(vga);
-    } else {
+    }
+     else {
         vga_put_entry(vga, ch, vga->color, vga->column, vga->row);
         if (++vga->column == VGA_WIDTH) {
             vga_next_line(vga);
@@ -53,7 +54,8 @@ void vga_next_line(vga_t *vga)
     vga->column = 0;
     if (vga->row < VGA_HEIGHT - 1) {
         ++vga->row;
-    } else {
+    }
+    else {
         vga_scroll_line(vga);
     }
 }
@@ -65,7 +67,8 @@ void vga_scroll_line(vga_t *vga)
     // Copy every character in each row to the same column in the next row, until the final row has been reached.
     for (uint8_t y = 0; y < VGA_HEIGHT - 1; ++y) {
         memcpy((void *)(vga->buffer + (y * VGA_WIDTH)),
-               (void *)(vga->buffer + ((y + 1) * VGA_WIDTH)), VGA_WIDTH * sizeof(uint16_t));
+               (void *)(vga->buffer + ((y + 1) * VGA_WIDTH)),
+               VGA_WIDTH * sizeof(uint16_t));
     }
 
     // Clear the last row

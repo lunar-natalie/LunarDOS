@@ -5,4 +5,4 @@
 #pragma once
 
 void tty_init(void);
-int tty_puts(const char *str);
+int  tty_puts(const char *str);

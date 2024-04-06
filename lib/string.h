@@ -7,4 +7,4 @@
 #include <stddef.h>
 
 size_t strlen(const char *str);
-void *memcpy(void *restrict dest, const void *restrict src, size_t count);
+void  *memcpy(void *restrict dest, const void *restrict src, size_t count);

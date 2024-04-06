@@ -14,7 +14,7 @@ size_t strlen(const char *str)
 
 void *memcpy(void *restrict dest, const void *restrict src, size_t count)
 {
-    char *c_dest = (char *)dest;
+    char       *c_dest = (char *)dest;
     const char *c_src  = (char *)src;
     for (size_t i = 0; i < count; ++i) {
         c_dest[i] = c_src[i];
