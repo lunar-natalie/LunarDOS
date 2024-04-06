@@ -2,7 +2,7 @@
 
 ## Build Requirements
 
-- [CMake](https://cmake.org/) >= 2.27
+- [CMake](https://cmake.org/) >= 3.27
 
 Toolchain for target platform:
 - [GCC](https://gcc.gnu.org/) >= 8.1.0
