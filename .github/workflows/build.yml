@@ -1,0 +1,25 @@
+name: Build
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    container:
+      image: lunarnatalie/os-build
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Configure for i686-elf
+        run: cmake -B ${{ steps.strings.outputs.build-output-dir }} -S ${{ github.workspace }} --preset i686-elf
+
+      - name: Build
+        run: cmake --build ${{ steps.strings.outputs.build-output-dir }}
+
+      - name: Test
+        working-directory: ${{ steps.strings.outputs.build-output-dir }}
+        run: ctest
