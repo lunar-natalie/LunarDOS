@@ -2,6 +2,7 @@
 
 target_sources(Kernel PRIVATE
         boot.s
+        cpu/control.s
         cpu/gdt.c
         cpu/gdt.s
         cpu/idt.c
