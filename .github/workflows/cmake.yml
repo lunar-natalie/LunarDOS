@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  cmake-build:
     runs-on: ubuntu-22.04
     container:
       image: lunarnatalie/os-build
