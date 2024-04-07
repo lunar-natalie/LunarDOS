@@ -3,9 +3,8 @@
 
 #include <kernel/tty.h>
 
-#include <string.h>
-
 #include "video/vga.h"
+#include <string.h>
 
 static vga_t vga;
 
