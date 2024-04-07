@@ -4,15 +4,14 @@
 
 - [CMake](https://cmake.org/) >= 3.27
 
-Toolchain for target platform:
+Toolchain with a cross-compiler built for the target platform:
 - [GCC](https://gcc.gnu.org/) >= 8.1.0
-- [GNU Binutils](https://www.gnu.org/software/binutils/)
+- [Binutils](https://www.gnu.org/software/binutils/) >= 2.41
 
-Bootable disk image for x86 systems:
+Bootable media creation:
 - [GRUB 2](https://git.savannah.gnu.org/git/grub.git) command-line tools
+  - Runtime dependencies: `xorriso` `mtools`
   - Build dependencies: `autoconf` `automake` `gawk`
-- [GNU xorriso](https://www.gnu.org/software/xorriso/)
-- [GNU mtools](https://www.gnu.org/software/mtools/)
 
 ## Supported Platforms
 
