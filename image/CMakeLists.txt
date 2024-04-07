@@ -1,7 +1,5 @@
 # Bootable disk image
 
-find_program(GRUB_MKRESCUE "grub-mkrescue")
-find_program(XORRISO "xorriso")
 if((GRUB_MKRESCUE STREQUAL "GRUB_MKRESCUE-NOTFOUND") OR (XORRISO STREQUAL "XORRISO-NOTFOUND"))
     message("-- Unable to find grub-mkrescue/xorriso - image build is disabled")
     return()

@@ -20,3 +20,4 @@ target_link_libraries(Kernel PRIVATE Libc)
 target_link_options(Kernel PRIVATE ${LDFLAGS} -T${LD_SCRIPT})
 target_compile_options(Kernel PRIVATE $<$<COMPILE_LANGUAGE:C>:${CFLAGS}>)
 set_property(TARGET Kernel APPEND PROPERTY LINK_DEPENDS ${LD_SCRIPT})
+

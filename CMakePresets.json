@@ -22,6 +22,10 @@
         "TARGET_PLATFORM": {
           "type": "STRING",
           "value": "i686-elf"
+        },
+        "ENABLE_TESTS": {
+          "type": "BOOL",
+          "value": "ON"
         }
       }
     }
@@ -30,6 +34,14 @@
     {
       "name": "default",
       "configurePreset": "default"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "default",
+      "configurePreset": "default",
+      "output": {"outputOnFailure": true},
+      "execution": {"noTestsAction": "error", "stopOnFailure": true}
     }
   ],
   "workflowPresets": [
@@ -42,6 +54,10 @@
         },
         {
           "type": "build",
+          "name": "default"
+        },
+        {
+          "type": "test",
           "name": "default"
         }
       ]
