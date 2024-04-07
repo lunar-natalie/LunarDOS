@@ -34,7 +34,7 @@ void vga_write_ch(vga_t *vga, char ch)
     if (ch == '\n') {
         vga_next_line(vga);
     }
-     else {
+    else {
         vga_put_entry(vga, ch, vga->color, vga->column, vga->row);
         if (++vga->column == VGA_WIDTH) {
             vga_next_line(vga);

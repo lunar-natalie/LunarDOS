@@ -3,7 +3,8 @@ BasedOnStyle: LLVM
 
 AlignConsecutiveAssignments: Consecutive
 AlignConsecutiveDeclarations: Consecutive
-AllowShortFunctionsOnASingleLine: Empty
+AlignConsecutiveBitFields: Consecutive
+AllowShortFunctionsOnASingleLine: None
 BinPackArguments: false
 BinPackParameters: true
 BreakBeforeBraces: Stroustrup
