@@ -29,12 +29,14 @@ cd default && \
 cmake --build .
 ```
 
-## Testing
+## Virtualization
 
-Requires [QEMU](https://www.qemu.org/):
+Requires [QEMU](https://www.qemu.org/).
+
+From the `build` directory, run:
 
 ```shell
-qemu-system-<ARCH> -cdrom system.iso
+qemu-system-<ARCHITECTURE> -cdrom system.iso
 ```
 
 ## License
