@@ -12,6 +12,7 @@ Bootable disk image for x86 systems:
 - [GRUB 2](https://git.savannah.gnu.org/git/grub.git) command-line tools
   - Build dependencies: `autoconf` `automake` `gawk`
 - [GNU xorriso](https://www.gnu.org/software/xorriso/)
+- [GNU mtools](https://www.gnu.org/software/mtools/)
 
 ## Supported Platforms
 
