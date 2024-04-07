@@ -24,5 +24,4 @@ void kernel_main(void)
     idt_init();
 
     printf("Loaded\n");
-    //    printf("Version %d.%d.%d", KERNEL_VERSION.major, KERNEL_VERSION.minor, KERNEL_VERSION.patch);
 }
