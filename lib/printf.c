@@ -7,9 +7,9 @@
 
 int printf(const char *restrict format, ...)
 {
-    int result = 0;
-
+    int     result = 0;
     va_list args;
+
     va_start(args, format);
     result = vprintf(format, args);
     va_end(args);
