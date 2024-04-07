@@ -5,14 +5,14 @@
 .global load_tss
 .type load_tss, @function
 load_tss:
-	push	%ebp			// Save stack frame
+	push	%ebp
 	mov	%esp, %ebp
 
 	// Load TSS selector corresponding to the given GDT entry
-	mov	12(%ebp), %ax		// Get GDT index
-	mulw	8			// Multiply by descriptor size of 8 bytes
+	mov	12(%ebp), %ax		// GDT index
+	mul	8			// 8 byte descriptor size
 	or	%ax, 8(%ebp)		// OR with RPL
         ltr	%ax			// Load selector into task register
 
-	pop	%ebp			// Restore stack frame
+	pop	%ebp
         ret

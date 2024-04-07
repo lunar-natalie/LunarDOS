@@ -4,7 +4,7 @@
 
 .altmacro		// Enable macro parameters
 
-// Creates an ISR handler `isr_stub_N` for IRQ N to call the default exception handler.
+// Creates an ISR calling the default exception handler for the given IRQ.
 .macro isr_err_stub irq
 .align 4
 .extern kernel_exception_handler
@@ -16,7 +16,7 @@ isr_stub_\irq:
 	iret
 .endm
 
-// Creates an empty ISR handler `isr_stub_N` for IRQ N.
+// Creates an empty ISR handler for the given IRQ.
 .macro isr_no_err_stub irq
 .align 4
 isr_stub_\irq:

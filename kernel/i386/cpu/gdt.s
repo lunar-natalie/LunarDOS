@@ -5,25 +5,25 @@
 .global load_gdt
 .type load_gdt, @function
 load_gdt:
-	push	%ebp		// Save stack frame
+	push	%ebp
 	mov	%esp, %ebp
 
-	mov	12(%ebp), %ax 	// Get limit
-	cmp	$0, %ax		// Return if zero
+	mov	12(%ebp), %ax 	// Limit
+	cmp	$0, %ax
 	je	1f
 	mov	%ax, gdtr
 
-	mov	8(%ebp), %eax	// Get base
+	mov	8(%ebp), %eax	// Base
 	mov	%eax, gdtr + 2
 
-	lgdt	gdtr		// Write to register
+	lgdt	gdtr
 
 	xor	%eax, %eax	// Success
 	jmp	2f
 
 1:	mov	$1, %eax	// Fail
 
-2:	pop	%ebp		// Restore stack frame
+2:	pop	%ebp
 	ret
 
 gdtr:
