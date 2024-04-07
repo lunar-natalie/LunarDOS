@@ -33,7 +33,7 @@ cmake --build .
 
 Requires [QEMU](https://www.qemu.org/).
 
-From the `build` directory, run:
+From the build directory, run:
 
 ```shell
 qemu-system-<ARCHITECTURE> -cdrom system.iso
