@@ -4,9 +4,8 @@
 
 #pragma once
 
-#include <stdint.h>
-
 #include "tss.h"
+#include <stdint.h>
 
 // GDT entry metadata
 typedef struct {

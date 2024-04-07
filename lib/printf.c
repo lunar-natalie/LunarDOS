@@ -22,7 +22,8 @@ int vprintf(const char *restrict format, va_list vlist)
     int result = 0;
     while (*format != '\0') {
         if (*format == '%') {
-            char specifier = *++format; // Get format specifier at next character
+            // Get format specifier at next character
+            char specifier = *++format;
             // char
             if (specifier == 'c') {
                 int value = va_arg(vlist, int);

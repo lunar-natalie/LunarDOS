@@ -2,13 +2,11 @@
 // Copyright (c) 2024 Natalie Wiggins. All rights reserved.
 // SPDX-License-Identifier: GPL-3.0-only
 
-#include <stdio.h>
-
 #include "cpu/gdt.h"
 #include "cpu/idt.h"
 #include "cpu/tss.h"
 #include <kernel/tty.h>
-#include <kernel/version.h>
+#include <stdio.h>
 
 void kernel_main(void)
 {
