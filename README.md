@@ -10,7 +10,7 @@ Toolchain with a cross-compiler built for the target platform:
 
 Bootable media creation:
 - [GRUB 2](https://git.savannah.gnu.org/git/grub.git) command-line tools
-  - Runtime dependencies: `xorriso` `mtools`
+  - Runtime dependencies: `xorriso`
   - Build dependencies: `autoconf` `automake` `gawk`
 
 ## Supported Platforms
@@ -21,22 +21,30 @@ Bootable media creation:
 
 ## Building
 
+Configure the project, specifying `<PLATFORM>`:
 ```shell
 mkdir -p build && \
 cd build && \
-cmake .. --preset <PLATFORM> && \
-cd default && \
-cmake --build .
+cmake .. --preset <PLATFORM>
+```
+
+Build all targets:
+```shell
+cmake --build default
+```
+
+Run tests:
+```shell
+cd .. && \
+ctest --preset default --test-dir build/default/Testing
 ```
 
 ## Virtualization
 
-Requires [QEMU](https://www.qemu.org/).
-
-From the build directory, run:
+To virtualize the system with [QEMU](https://www.qemu.org/), run the following command, specifying `<ARCH>`:
 
 ```shell
-qemu-system-<ARCHITECTURE> -cdrom system.iso
+qemu-system-<ARCH> -cdrom build/default/system.iso
 ```
 
 ## License
