@@ -16,7 +16,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Configure for i686-elf
+      - name: Configure
         run: cmake -B ${{ steps.strings.outputs.build-output-dir }} -S ${{ github.workspace }} --preset i686-elf
 
       - name: Build

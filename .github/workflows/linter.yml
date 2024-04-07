@@ -10,7 +10,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Run linter
+      - name: Linter
         id: linter
         uses: cpp-linter/cpp-linter-action@v2
         with:
