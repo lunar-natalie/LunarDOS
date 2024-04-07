@@ -3,9 +3,9 @@
 
 #include <string.h>
 
-//void *malloc(size_t size)
+// void *malloc(size_t size)
 //{
-//}
+// }
 
 void *memcpy(void *restrict dest, const void *restrict src, size_t count)
 {
