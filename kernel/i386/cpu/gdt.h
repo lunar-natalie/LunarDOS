@@ -28,8 +28,7 @@ typedef struct {
     unsigned int base_high  : 8;  // Base bits 24-31
 } __attribute__((packed, aligned(4))) gdt_entry_t;
 
-typedef uint8_t gdt_index_t;
-enum gdt_index : gdt_index_t {
+enum gdt_index {
     GDT_INDEX_NULL       = 0,
     GDT_INDEX_RING0_CODE = 1,
     GDT_INDEX_RING0_DATA = 2,

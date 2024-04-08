@@ -62,7 +62,7 @@ void gdt_init(const tss_t *tss)
     gdt_info[GDT_INDEX_RING0_TSS - 1] = &gdt_ring0_tss;
 
     // Encode metadata
-    for (gdt_index_t i = 0; i < GDT_LENGTH - 1; ++i) {
+    for (size_t i = 0; i < GDT_LENGTH - 1; ++i) {
         encode_gdt_entry(&gdt[i + 1], gdt_info[i]);
     }
 
