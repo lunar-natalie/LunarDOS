@@ -18,8 +18,10 @@ jobs:
 
       - name: Set environment variables
         id: env
-        shell: bash
         run: echo "build-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
+
+      - name: Log
+        run: ls -l ${{ github.workspace }}
 
       - name: Configure for i686-elf
         run: cmake -S ${{ github.workspace }} -B ${{ steps.env.outputs.build-dir }} --preset i686-elf
