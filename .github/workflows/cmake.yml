@@ -25,8 +25,7 @@ jobs:
         run: cmake -B ${{ steps.env.outputs.build-dir }} --preset i686-elf
 
       - name: Build
-        working-directory: ${{ steps.env.outputs.build-dir }}
-        run: cmake --build .
+        run: cmake --build ${{ steps.env.outputs.build-dir }}
 
       - name: Test
         working-directory: ${{ steps.env.outputs.build-dir }}
