@@ -13,8 +13,8 @@ jobs:
       image: lunarnatalie/os-build
 
     steps:
-      - name: Set reusable strings
-        id: strings
+      - name: Set additional environment variables
+        id: env
         shell: bash
         run: >
           echo "build-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
@@ -23,11 +23,11 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Configure for i686-elf
-        run: cmake -S ${{ github.workspace }} -B ${{ steps.strings.outputs.build-dir }} --preset i686-elf
+        run: cmake -S ${{ github.workspace }} -B ${{ steps.env.outputs.build-dir }} --preset i686-elf
 
       - name: Build
-        run: cmake --build ${{ steps.strings.outputs.build-dir }}
+        run: cmake --build ${{ steps.env.outputs.build-dir }}
 
       - name: Test
-        working-directory: ${{ steps.strings.outputs.build-output-dir }}
+        working-directory: ${{ steps.env.outputs.build-output-dir }}
         run: ctest
