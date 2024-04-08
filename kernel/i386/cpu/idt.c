@@ -13,7 +13,7 @@ extern uint32_t    isr_stub_table[IDT_LENGTH];
 void idt_init(void)
 {
     /* Add exception ISRs */
-    for (uint8_t i = 0; i < 32; ++i) {
+    for (int i = 0; i < 32; ++i) {
         idt_info[i].offset          = isr_stub_table[i];
         idt_info[i].selector        = GDT_INDEX_RING0_CODE;
         idt_info[i].type_attributes = IDT_TYPE_RING0_INT32;

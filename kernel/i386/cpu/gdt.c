@@ -62,7 +62,7 @@ void gdt_init(const tss_t *tss)
     gdt_info[GDT_INDEX_RING0_TSS - 1] = &gdt_ring0_tss;
 
     // Encode metadata
-    for (gdt_index_t i = 0; i < GDT_LENGTH - 1; ++i) {
+    for (int i = 0; i < GDT_LENGTH - 1; ++i) {
         encode_gdt_entry(&gdt[i + 1], gdt_info[i]);
     }
 
@@ -80,8 +80,8 @@ void encode_gdt_entry(gdt_entry_t *dest, const gdt_info_t *source)
     dest->limit_low  = source->limit & 0xFFFF;       // Bits 0-15
     dest->limit_high = (source->limit >> 16) & 0x0F; // Bits 16-19
 
-    dest->base_low  = source->base & 0xFFFFFF; // Bits 0-24
-    dest->base_high = source->base >> 24;      // Bits 24-31
+    dest->base_low  = source->base & 0xFFFFFF;       // Bits 0-24
+    dest->base_high = source->base >> 24;            // Bits 24-31
 
     dest->access = source->access;
     dest->flags  = source->flags;

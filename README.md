@@ -4,14 +4,16 @@
 
 - [CMake](https://cmake.org/) >= 3.27
 
-Toolchain for target platform:
-- [GCC](https://gcc.gnu.org/) >= 8.1.0
-- [GNU Binutils](https://www.gnu.org/software/binutils/)
+Toolchain with a cross-compiler built for the target platform:
 
-Bootable disk image for x86 systems:
+- [GCC](https://gcc.gnu.org/) >= 8.1.0
+- [Binutils](https://www.gnu.org/software/binutils/) >= 2.41
+
+Bootable media creation:
+
 - [GRUB 2](https://git.savannah.gnu.org/git/grub.git) command-line tools
+  - Runtime dependencies: `xorriso`
   - Build dependencies: `autoconf` `automake` `gawk`
-- [GNU xorriso](https://www.gnu.org/software/xorriso/)
 
 ## Supported Platforms
 
@@ -21,20 +23,31 @@ Bootable disk image for x86 systems:
 
 ## Building
 
+Configure the project, specifying `<PLATFORM>`:
+
 ```shell
-mkdir -p build && \
-cd build && \
-cmake .. --preset <PLATFORM> && \
-cd default && \
-cmake --build .
+mkdir -p build
+cmake -B build --preset <PLATFORM>
 ```
 
-## Testing
-
-Requires [QEMU](https://www.qemu.org/):
+Build all targets:
 
 ```shell
-qemu-system-<ARCH> -cdrom system.iso
+cmake --build build
+```
+
+Run tests:
+
+```shell
+ctest --test-dir build
+```
+
+## Virtualization
+
+To virtualize the system with [QEMU](https://www.qemu.org/), run the following command, specifying `<ARCH>`:
+
+```shell
+qemu-system-<ARCH> -cdrom build/system.iso
 ```
 
 ## License

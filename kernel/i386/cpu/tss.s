@@ -10,7 +10,7 @@ load_tss:
 
 	// Load TSS selector corresponding to the given GDT entry
 	mov	12(%ebp), %ax		// GDT index
-	mul	8			// 8 byte descriptor size
+	mulw	8			// 8 byte descriptor size
 	or	%ax, 8(%ebp)		// OR with RPL
         ltr	%ax			// Load selector into task register
 

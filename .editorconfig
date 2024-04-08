@@ -19,3 +19,6 @@ tab_width = 8
 [{grub.cfg,grub.cfg.in}]
 indent_style = tab
 tab_width = 8
+
+[*.md]
+tab_width = 2

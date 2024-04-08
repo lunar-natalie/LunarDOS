@@ -15,3 +15,11 @@ target_sources(Kernel PRIVATE
         tty.c
         video/vga.c
 )
+
+if(ENABLE_TESTS)
+    if(GRUB_FILE STREQUAL "GRUB_FILE-NOTFOUND")
+        message("-- Unable to find grub-file - Multiboot test is disabled")
+    else()
+        add_test(NAME Multiboot COMMAND ${GRUB_FILE} --is-x86-multiboot "$<TARGET_FILE:Kernel>")
+    endif()
+endif()

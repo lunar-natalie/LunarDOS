@@ -1,0 +1,46 @@
+name: Linter
+on:
+  push:
+  pull_request:
+
+jobs:
+  cpp-linter:
+    runs-on: ubuntu-22.04
+    container:
+      image: lunarnatalie/os-build
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set environment variables
+        id: env
+        run: echo "build-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
+
+      - name: Install APT dependencies
+        run: >
+          sudo apt-get update &&
+          sudo apt-get install -y lsb-release wget software-properties-common gnupg
+
+      - name: Configure CMake project
+        working-directory: ${{ github.workspace }}
+        run: cmake -B ${{ steps.env.outputs.build-dir }} --preset i686-elf-lint
+
+      - name: Run linter
+        id: linter
+        uses: cpp-linter/cpp-linter-action@v2
+        with:
+          database: ${{ steps.env.outputs.build-dir }}
+          version: 16     # Clang version
+          style: file     # Use .clang-format
+          tidy-checks: '' # Use .clang-tidy
+          # Only update a single comment in PR threads
+          thread-comments: ${{ github.event_name == 'pull_request' && 'update' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Fail fast
+        if: steps.linter.outputs.checks-failed > 0
+        run: |
+          echo "Some files failed the linting checks!"
+          exit 1

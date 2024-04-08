@@ -22,6 +22,26 @@
         "TARGET_PLATFORM": {
           "type": "STRING",
           "value": "i686-elf"
+        },
+        "ENABLE_TESTS": {
+          "type": "BOOL",
+          "value": true
+        }
+      }
+    },
+    {
+      "name": "i686-elf-lint",
+      "inherits": "default",
+      "displayName": "i686-elf (Linter)",
+      "description": "Linter configuration for the i686-elf platform",
+      "cacheVariables": {
+        "TARGET_PLATFORM": {
+          "type": "STRING",
+          "value": "i686-elf"
+        },
+        "CMAKE_EXPORT_COMPILE_COMMANDS": {
+          "type": "BOOL",
+          "value": true
         }
       }
     }
@@ -30,6 +50,19 @@
     {
       "name": "default",
       "configurePreset": "default"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "default",
+      "configurePreset": "default",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error",
+        "stopOnFailure": true
+      }
     }
   ],
   "workflowPresets": [
@@ -42,6 +75,10 @@
         },
         {
           "type": "build",
+          "name": "default"
+        },
+        {
+          "type": "test",
           "name": "default"
         }
       ]
