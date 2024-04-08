@@ -15,6 +15,7 @@ jobs:
     steps:
       - name: Set reusable strings
         id: strings
+        shell: bash
         run: >
           echo "build-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
 
