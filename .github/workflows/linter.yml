@@ -6,14 +6,26 @@ on:
 jobs:
   cpp-linter:
     runs-on: ubuntu-22.04
+    container:
+      image: lunarnatalie/os-build
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Linter
+      - name: Set environment variables
+        id: env
+        run: echo "build-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
+
+      - name: Configure
+        working-directory: ${{ github.workspace }}
+        run: cmake -B ${{ steps.env.outputs.build-dir }} -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=ON
+
+      - name: Run linter
         id: linter
         uses: cpp-linter/cpp-linter-action@v2
         with:
+          database: ${{ steps.env.outputs.build-dir }}
           version: 16     # Clang version
           style: file     # Use .clang-format
           tidy-checks: '' # Use .clang-tidy
