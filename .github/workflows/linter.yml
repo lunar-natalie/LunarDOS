@@ -17,9 +17,9 @@ jobs:
         id: env
         run: echo "build-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
 
-      - name: Configure for i686-elf
+      - name: Configure
         working-directory: ${{ github.workspace }}
-        run: cmake -B ${{ steps.env.outputs.build-dir }} -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=ON --preset i686-elf
+        run: cmake -B ${{ steps.env.outputs.build-dir }} --preset i686-elf-linter
 
       - name: Run linter
         id: linter

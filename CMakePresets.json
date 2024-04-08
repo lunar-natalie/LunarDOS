@@ -25,7 +25,23 @@
         },
         "ENABLE_TESTS": {
           "type": "BOOL",
-          "value": "ON"
+          "value": true
+        }
+      }
+    },
+    {
+      "name": "i686-elf-linter",
+      "inherits": "default",
+      "displayName": "i686-elf (Linter)",
+      "description": "Linter configuration for the i686-elf platform",
+      "cacheVariables": {
+        "TARGET_PLATFORM": {
+          "type": "STRING",
+          "value": "i686-elf"
+        },
+        "CMAKE_EXPORT_COMPILE_COMMANDS": {
+          "type": "BOOL",
+          "value": true
         }
       }
     }
