@@ -1,5 +1,8 @@
 # Operating System
 
+![CMake](https://github.com/lunar-natalie/os/actions/workflows/cmake.yml/badge.svg)
+![Linter](https://github.com/lunar-natalie/os/actions/workflows/linter.yml/badge.svg)
+
 ## Build Requirements
 
 - [CMake](https://cmake.org/) >= 3.27
@@ -12,14 +15,16 @@ Toolchain with a cross-compiler built for the target platform:
 Bootable media creation:
 
 - [GRUB 2](https://git.savannah.gnu.org/git/grub.git) command-line tools
-  - Runtime dependencies: `xorriso`
+  - Runtime dependencies: `xorriso` `mtools`
   - Build dependencies: `autoconf` `automake` `gawk`
 
-## Supported Platforms
+## Supported Targets
 
 | Platform   | Architecture | Toolchain                          |
 |------------|--------------|------------------------------------|
 | `i686-elf` | `i386`       | `i686-elf-gcc` `i686-elf-binutils` |
+
+A [Docker image](https://github.com/lunar-natalie/os-build) is also provided with a toolchain for `i686-elf` builds.
 
 ## Building
 
