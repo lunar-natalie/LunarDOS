@@ -17,9 +17,14 @@ jobs:
         id: env
         run: echo "build-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
 
-      - name: Configure
+      - name: Install APT dependencies
+        run: >
+          sudo apt-get update &&
+          sudo apt-get install -y lsb-release wget software-properties-common gnupg
+
+      - name: Configure CMake project
         working-directory: ${{ github.workspace }}
-        run: cmake -B ${{ steps.env.outputs.build-dir }} --preset i686-elf-linter
+        run: cmake -B ${{ steps.env.outputs.build-dir }} --preset i686-elf-lint
 
       - name: Run linter
         id: linter
