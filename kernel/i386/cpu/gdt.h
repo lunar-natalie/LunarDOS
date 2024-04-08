@@ -15,7 +15,7 @@ typedef struct {
     uint8_t  flags;
 } gdt_info_t;
 
-#define GDT_MAX_LIMIT 0xFFFFF
+enum { GDT_MAX_LIMIT = 0xFFFFF };
 
 // GDT entry data
 typedef struct {

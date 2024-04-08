@@ -7,7 +7,7 @@
 #include <stdint.h>
 
 typedef uint8_t idt_index_t;
-#define IDT_LENGTH UINT8_MAX
+enum { IDT_LENGTH = UINT8_MAX };
 
 // IDT entry metadata
 typedef struct {
