@@ -1,7 +1,10 @@
-# Bootable disk image
+# Boot media
 
-if((GRUB_MKRESCUE STREQUAL "GRUB_MKRESCUE-NOTFOUND") OR (XORRISO STREQUAL "XORRISO-NOTFOUND"))
-    message("-- Unable to find grub-mkrescue/xorriso - image build is disabled")
+if(GRUB_MKRESCUE STREQUAL "GRUB_MKRESCUE-NOTFOUND")
+    message("-- Unable to find grub-mkrescue - image build is disabled")
+    return()
+elseif(XORRISO STREQUAL "XORRISO-NOTFOUND")
+    message("-- Unable to find xorriso - image build is disabled")
     return()
 endif()
 
