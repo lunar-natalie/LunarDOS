@@ -13,14 +13,19 @@ jobs:
       image: lunarnatalie/os-build
 
     steps:
+      - name: Set reusable strings
+        id: strings
+        run: >
+          echo "build-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
+
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Configure
-        run: cmake -B ${{ steps.strings.outputs.build-output-dir }} -S ${{ github.workspace }} --preset i686-elf
+      - name: Configure for i686-elf
+        run: cmake -S ${{ github.workspace }} -B ${{ steps.strings.outputs.build-dir }} --preset i686-elf
 
       - name: Build
-        run: cmake --build ${{ steps.strings.outputs.build-output-dir }}
+        run: cmake --build ${{ steps.strings.outputs.build-dir }}
 
       - name: Test
         working-directory: ${{ steps.strings.outputs.build-output-dir }}
