@@ -34,7 +34,6 @@ cmake --build build
 
 Run tests:
 ```shell
-cd .. && \
 ctest --test-dir build
 ```
 
