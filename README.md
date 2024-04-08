@@ -23,20 +23,19 @@ Bootable media creation:
 
 Configure the project, specifying `<PLATFORM>`:
 ```shell
-mkdir -p build && \
-cd build && \
-cmake .. --preset <PLATFORM>
+mkdir -p build
+cmake -B build --preset <PLATFORM>
 ```
 
 Build all targets:
 ```shell
-cmake --build default
+cmake --build build
 ```
 
 Run tests:
 ```shell
 cd .. && \
-ctest --preset default --test-dir build/default/Testing
+ctest --test-dir build
 ```
 
 ## Virtualization
