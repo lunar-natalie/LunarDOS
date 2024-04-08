@@ -30,7 +30,7 @@
       }
     },
     {
-      "name": "i686-elf-linter",
+      "name": "i686-elf-lint",
       "inherits": "default",
       "displayName": "i686-elf (Linter)",
       "description": "Linter configuration for the i686-elf platform",
