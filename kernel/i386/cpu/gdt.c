@@ -80,8 +80,8 @@ void encode_gdt_entry(gdt_entry_t *dest, const gdt_info_t *source)
     dest->limit_low  = source->limit & 0xFFFF;       // Bits 0-15
     dest->limit_high = (source->limit >> 16) & 0x0F; // Bits 16-19
 
-    dest->base_low  = source->base & 0xFFFFFF; // Bits 0-24
-    dest->base_high = source->base >> 24;      // Bits 24-31
+    dest->base_low  = source->base & 0xFFFFFF;       // Bits 0-24
+    dest->base_high = source->base >> 24;            // Bits 24-31
 
     dest->access = source->access;
     dest->flags  = source->flags;
