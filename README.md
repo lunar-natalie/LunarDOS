@@ -42,7 +42,7 @@ ctest --test-dir build
 To virtualize the system with [QEMU](https://www.qemu.org/), run the following command, specifying `<ARCH>`:
 
 ```shell
-qemu-system-<ARCH> -cdrom build/default/system.iso
+qemu-system-<ARCH> -cdrom build/system.iso
 ```
 
 ## License
