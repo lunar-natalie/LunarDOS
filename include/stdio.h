@@ -6,4 +6,4 @@
 #include <stdarg.h>
 
 int printf(const char *restrict format, ...);
-int vprintf(const char *restrict format, va_list vlist);
+int vprintf(const char *restrict format, va_list vlist); // NOLINT

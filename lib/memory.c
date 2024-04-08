@@ -7,7 +7,7 @@
 // {
 // }
 
-void *memcpy(void *restrict dest, const void *restrict src, size_t count) // NOLINT
+void *memcpy(void *restrict dest, const void *restrict src, size_t count)
 {
     char       *c_dest = (char *)dest;
     const char *c_src  = (char *)src;

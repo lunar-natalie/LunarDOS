@@ -17,7 +17,7 @@ int printf(const char *restrict format, ...)
     return result;
 }
 
-int vprintf(const char *restrict format, va_list vlist)
+int vprintf(const char *restrict format, va_list vlist) // NOLINT
 {
     int result = 0;
     while (*format != '\0') {
