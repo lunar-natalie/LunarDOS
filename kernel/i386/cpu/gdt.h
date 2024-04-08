@@ -24,8 +24,8 @@ typedef struct {
     unsigned int access     : 8;  // Access byte
     unsigned int limit_high : 4;  // Limit bits 16-19
     unsigned int reserved   : 1;
-    unsigned int flags      : 3; // Flags byte
-    unsigned int base_high  : 8; // Base bits 24-31
+    unsigned int flags      : 3;  // Flags byte
+    unsigned int base_high  : 8;  // Base bits 24-31
 } __attribute__((packed, aligned(4))) gdt_entry_t;
 
 typedef uint8_t gdt_index_t;

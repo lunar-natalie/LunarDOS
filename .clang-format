@@ -5,6 +5,9 @@ AlignConsecutiveAssignments: Consecutive
 AlignConsecutiveDeclarations: Consecutive
 AlignConsecutiveBitFields: Consecutive
 AllowShortFunctionsOnASingleLine: None
+AlignTrailingComments:
+  Kind: Always
+  OverEmptyLines: 1
 BinPackArguments: false
 BinPackParameters: true
 BreakBeforeBraces: Stroustrup
