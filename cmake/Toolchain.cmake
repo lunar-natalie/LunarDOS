@@ -1,5 +1,10 @@
 # Loads the toolchain for the target platform
 
+if(NOT(TARGET_PLATFORM))
+    message("-- TARGET_PLATFORM is not set - skipping toolchain setup")
+    return()
+endif()
+
 # Split target
 string(REPLACE "-" ";" TARGET_LIST "${TARGET_PLATFORM}")
 list(GET TARGET_LIST 0 TARGET_MACH)
