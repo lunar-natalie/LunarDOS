@@ -28,5 +28,4 @@ jobs:
         run: cmake --build ${{ steps.env.outputs.build-dir }}
 
       - name: Test
-        working-directory: ${{ steps.env.outputs.build-dir }}
-        run: ctest
+        run: ctest --test-dir ${{ steps.env.outputs.build-dir }}
