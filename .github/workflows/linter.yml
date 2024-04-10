@@ -26,7 +26,7 @@ jobs:
         uses: cpp-linter/cpp-linter-action@v2
         with:
           database: ${{ steps.env.outputs.build-dir }}
-          version: ''     # Use installed versions
+          version: 11     # Use installed versions
           style: file     # Use .clang-format
           tidy-checks: '' # Use .clang-tidy
           # Only update a single comment in PR threads
