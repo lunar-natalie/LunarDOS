@@ -19,7 +19,7 @@ static gdt_info_t  gdt_ring3_code; // Userspace code segment
 static gdt_info_t  gdt_ring3_data; // Userspace data segment
 static gdt_info_t  gdt_ring0_tss;  // Task state segment
 
-void gdt_init(const tss_t *tss)
+void init_gdt(const tss_t *tss)
 {
     // Null descriptor
     gdt[GDT_INDEX_NULL] = GDT_NULL;
@@ -62,8 +62,8 @@ void gdt_init(const tss_t *tss)
     gdt_info[GDT_INDEX_RING0_TSS - 1] = &gdt_ring0_tss;
 
     // Encode metadata
-    for (int i = 0; i < GDT_LENGTH - 1; ++i) {
-        encode_gdt_entry(&gdt[i + 1], gdt_info[i]);
+    for (int i = 1; i < GDT_LENGTH; ++i) {
+        encode_gdt_entry(&gdt[i], gdt_info[i - 1]);
     }
 
     // Load into GDTR

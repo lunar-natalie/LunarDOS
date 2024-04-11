@@ -6,6 +6,6 @@
 
 #include <stddef.h>
 
-void   tty_init(void);
+void   init_tty(void);
 void   tty_putc(char ch);
 size_t tty_puts(const char *str);

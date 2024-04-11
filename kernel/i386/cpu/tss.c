@@ -10,7 +10,7 @@ struct {
     uint32_t esp;
 } __attribute__((packed)) boot_tss;
 
-tss_t *tss_init()
+tss_t *init_tss()
 {
     tss.ss0  = boot_tss.ss;
     tss.esp0 = boot_tss.esp;

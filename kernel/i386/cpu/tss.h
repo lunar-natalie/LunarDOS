@@ -44,9 +44,10 @@ typedef struct {
     uint32_t ssp;  // Shadow stack pointer
 } __attribute__((packed)) tss_t;
 
-// Initializes the TSS and returns the segment for ring 0.
-tss_t *tss_init();
+// Initializes the TSS and returns the kernel segment
+tss_t *init_tss();
 
-// Loads the TSS at the given index into the GDT with the given requested privilege level into the task register.
-// Must be called after the GDT has been loaded.
+// Loads the TSS at the given index into the GDT into the task register
+// rpl - Requested Privilege Level
+// Must be called after the GDT has been loaded
 extern void load_tss(uint8_t gdt_index, uint16_t rpl);

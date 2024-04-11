@@ -2,4 +2,4 @@
 
 #include <kernel/version.h>
 
-__attribute__((unused)) static const version_t KERNEL_VERSION = {.major = @PROJECT_VERSION_MAJOR@, .minor = @PROJECT_VERSION_MINOR@, .patch = @PROJECT_VERSION_PATCH@};
+static const version_t KERNEL_VERSION __attribute__((unused)) = {.major = @PROJECT_VERSION_MAJOR@, .minor = @PROJECT_VERSION_MINOR@, .patch = @PROJECT_VERSION_PATCH@};

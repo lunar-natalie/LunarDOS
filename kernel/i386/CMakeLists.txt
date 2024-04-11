@@ -8,6 +8,7 @@ target_sources(Kernel PRIVATE
         cpu/idt.c
         cpu/idt.s
         cpu/isr.s
+        cpu/paging.c
         cpu/tss.c
         cpu/tss.s
         exception.c

@@ -13,13 +13,14 @@ void kernel_main(void)
     static tss_t *tss;
 
     // Initialize terminal
-    tty_init();
+    init_tty();
 
     // Setup descriptor tables
-    gdt_init(tss);
-    tss = tss_init();
+    init_gdt(tss);
+    tss = init_tss();
     load_tss(GDT_INDEX_RING0_TSS, 0);
-    idt_init();
+    init_idt();
 
+    // TODO: Exception handling is non-functional and paging is incomplete.
     printf("Loaded\n");
 }

@@ -1,6 +1,6 @@
 # Loads the toolchain for the target platform
 
-if(NOT(TARGET_PLATFORM))
+if(NOT (TARGET_PLATFORM))
     message("-- TARGET_PLATFORM not set - skipped toolchain setup")
     return()
 endif()

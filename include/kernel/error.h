@@ -3,8 +3,9 @@
 
 #pragma once
 
-#include <kernel/runtime.h>
 #include <kernel/tty.h>
+
+extern void __attribute__((noreturn)) kernel_exit(void);
 
 static inline void __attribute__((noreturn)) kernel_error(const char *message)
 {
