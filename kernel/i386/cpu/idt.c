@@ -13,7 +13,7 @@ extern idt_index_t isr_stub_table[IDT_LENGTH];
 void init_idt(void)
 {
     // Fill IDT and encode metadata
-    for (idt_index_t i = 0; i < IDT_LENGTH; ++i) {
+    for (idt_index_t i = 0; i < 32; ++i) {
         set_irq(i, IDT_TYPE_INT32);
         encode_idt_entry(idt + i, idt_info + i);
     }

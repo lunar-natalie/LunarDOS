@@ -65,14 +65,14 @@ isr_exception_stub 6 // Invalid opcode
 isr_exception_stub 7 // Device not available
 isr_stub 8 // Double fault
 isr_stub 9 // Coprocessor segment overrun (pre-586)
-isr_exception_stub 10 // Invalid TSS
-isr_exception_stub 11 // Segment not present
-isr_exception_stub 12 // Stack-segment fault
-isr_exception_stub 13 // General protection fault
-isr_exception_stub 14 // Page fault
+isr_exception_error_stub 10 // Invalid TSS
+isr_exception_error_stub 11 // Segment not present
+isr_exception_error_stub 12 // Stack-segment fault
+isr_exception_error_stub 13 // General protection fault
+isr_exception_error_stub 14 // Page fault
 isr_stub 15 // Reserved
 isr_exception_stub 16 // x87 floating point exception
-isr_exception_stub 17 // Alignment check
+isr_exception_error_stub 17 // Alignment check
 isr_stub 18 // Machine check
 isr_exception_stub 19 // SIMD floating point exception
 isr_exception_stub 20 // Virtualization exception
