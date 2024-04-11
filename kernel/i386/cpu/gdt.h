@@ -56,7 +56,7 @@ enum GDT_ACCESS {
     GDT_ACCESS_DPL_2 = 1 << 6,
     GDT_ACCESS_DPL_3 = GDT_ACCESS_DPL_1 | GDT_ACCESS_DPL_2,
 
-    GDT_ACCESS_P = 1 << 7, // Present (must be set for any valid segment)
+    GDT_ACCESS_P = 1 << 7 // Present (must be set for any valid segment)
 };
 
 enum gdt_flags {
