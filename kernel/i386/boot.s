@@ -1,4 +1,4 @@
-// Multiboot v1-compatible kernel bootstrap assembly.
+// Multiboot v1-compatible kernel bootstrap assembly
 // Copyright (c) 2024 Natalie Wiggins. All rights reserved.
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -16,7 +16,7 @@
 .long FLAGS
 .long CHECKSUM
 
-// Stack (16K, 16-bit aligned)
+// Stack (16K, 16-byte alignment)
 .section .bss
 .align 16
 stack_bottom:
@@ -29,7 +29,7 @@ stack_top:
 .type _start, @function
 .extern boot_tss
 _start:
-	// Set stack and save task state segment for ring 0
+	// Initialize stack and save into the the task state segment for ring zero
 	mov	$stack_top, %esp
 	mov	%ss, boot_tss
 	mov	%esp, boot_tss + 4
@@ -50,3 +50,17 @@ _end:
 .type kernel_exit, @function
 kernel_exit:
 	jmp     _end
+
+/*
+.global test
+.type test, @function
+test:
+	push	%eax
+	push	%ebx
+	mov	$1, %eax
+	mov	$0, %ebx
+	div	%ebx
+	pop	%ebx
+	pop	%eax
+	ret
+*/

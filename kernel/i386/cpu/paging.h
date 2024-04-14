@@ -9,13 +9,13 @@ typedef struct {
     unsigned int address   : 20; // 4K-aligned physical address of the page (bits 31-12)
     unsigned int available : 4;  // Unused
     unsigned int flags     : 8;
-} __attribute__((packed, aligned(4))) page_dir_entry_t;
+} __attribute__((packed)) page_dir_entry_t;
 
 typedef struct {
     unsigned int address   : 20; // 4K-aligned physical address mapped to an empty 4K block (bits 31-12)
     unsigned int available : 3;  // Unused
     unsigned int flags     : 9;
-} __attribute__((packed, aligned(4))) page_table_entry_t;
+} __attribute__((packed)) page_table_entry_t;
 
 enum PAGE_DIRECTORY_FLAG {
     PAGE_DIRECTORY_FLAG_P   = 1 << 0, // Present
@@ -42,16 +42,4 @@ enum PAGE_TABLE_FLAG {
 
 enum { NUM_PAGES = 1024, PAGE_SIZE = 0x1000 };
 
-inline void encode_page_dir_entry(page_dir_entry_t *entry, const uint32_t address, uint8_t flags)
-{
-    entry->address = address & 0xFFFFF;
-    entry->flags   = flags;
-};
-
-inline void encode_page_table_entry(page_table_entry_t *entry, const uint32_t address, uint16_t flags)
-{
-    entry->address = address & 0xFFFFF;
-    entry->flags   = flags & 0x1FF;
-};
-
-void paging_init(void);
+void init_paging(void);

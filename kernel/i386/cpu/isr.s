@@ -1,8 +1,8 @@
-// Stubs for interrupt service routines.
+// Stubs for interrupt service routines
 // Copyright (c) 2024 Natalie Wiggins. All rights reserved.
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-.altmacro		// Enable macro parameters
+.altmacro			// Enable macro parameters
 
 .macro isr_stub irq
 .align 4
@@ -14,23 +14,18 @@ isr_stub_\irq:
 .align 4
 .extern kernel_exception_handler
 isr_stub_\irq:
-	pusha
 	cld			// DF must be clear on function entry
 	call	kernel_exception_handler
-	popa
 	iret
 .endm
 
-// Stub for exceptions which push an error code onto the stack
 .macro isr_exception_error_stub irq
 .align 4
 .extern kernel_exception_handler
 isr_stub_\irq:
-	pusha
-	cld			// DF must be clear on function entry
+	cld
 	call	kernel_exception_handler
-	popa
-	sub	$8, %esp	// Pop error
+	sub	$8, %esp	// Pop error code
 	iret
 .endm
 
@@ -41,7 +36,6 @@ isr_stub_\irq:
 
 .section .data
 
-// ISR stub table for the IDT
 .global isr_stub_table
 .align 4
 isr_stub_table:
@@ -50,7 +44,6 @@ isr_stub_table:
 	isr_table_entry %i
 	.set i, i+1
 .endr
-
 
 .section .text
 

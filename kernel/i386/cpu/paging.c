@@ -6,28 +6,29 @@
 #include "control.h"
 #include <stddef.h>
 
-static page_dir_entry_t   page_directory[NUM_PAGES];
-static page_table_entry_t page_table[NUM_PAGES];
+static page_dir_entry_t   page_directory[NUM_PAGES] __attribute__((aligned(PAGE_SIZE)));
+static page_table_entry_t page_table[NUM_PAGES] __attribute__((aligned(PAGE_SIZE)));
 
-void paging_init(void)
+void init_paging(void)
 {
-    // Add first page directory entry pointing to the page table
-    encode_page_dir_entry(
-        page_directory, (uint32_t)page_table, (uint8_t)(PAGE_DIRECTORY_FLAG_P | PAGE_DIRECTORY_FLAG_RW));
+    // Set first entry in the page directory to the page table
+    page_directory[0].address = (uint32_t)page_table;
+    page_directory[0].flags = PAGE_DIRECTORY_FLAG_P | PAGE_DIRECTORY_FLAG_RW;
 
-    // Fill remaining entries
+    // Fill the remaining empty entries in the page directory
     for (size_t i = 1; i < NUM_PAGES; ++i) {
-        encode_page_dir_entry(page_directory + i, (uint32_t)0, (uint8_t)PAGE_DIRECTORY_FLAG_RW);
+        page_directory[i].flags = PAGE_DIRECTORY_FLAG_RW;
     }
 
     // Map the first 4M of memory to 4K pages in the page table
     uint32_t address = 0;
     for (size_t i = 0; i < NUM_PAGES; ++i) {
-        encode_page_table_entry(page_table + i, address, (uint16_t)(PAGE_DIRECTORY_FLAG_P | PAGE_DIRECTORY_FLAG_RW));
+        page_table[i].address = address;
+        page_table[i].flags = PAGE_DIRECTORY_FLAG_P | PAGE_DIRECTORY_FLAG_RW;
         address += PAGE_SIZE;
     }
 
     // Enable paging
     write_cr3((uint32_t)page_directory);
-    write_cr0(read_cr0() | (uint32_t)(CR0_FLAG_PG));
+    write_cr0(read_cr0() | (uint32_t)CR0_FLAG_PG);
 }

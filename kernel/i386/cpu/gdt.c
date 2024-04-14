@@ -62,14 +62,12 @@ void init_gdt(const tss_t *tss)
     gdt_info[GDT_INDEX_RING0_TSS - 1] = &gdt_ring0_tss;
 
     // Encode metadata
-    for (int i = 1; i < GDT_LENGTH; ++i) {
+    for (gdt_index_t i = 1; i < GDT_LENGTH; ++i) {
         encode_gdt_entry(&gdt[i], gdt_info[i - 1]);
     }
 
-    // Load into GDTR
-    if (load_gdt(gdt, GDT_LENGTH - 1) != 0) {
-        kernel_error("Failed to load GDT\n");
-    }
+    // Load into GDTR and update segment
+    load_gdt(gdt, GDT_LENGTH - 1, GDT_INDEX_RING0_CODE, GDT_INDEX_RING0_DATA);
 }
 
 void encode_gdt_entry(gdt_entry_t *dest, const gdt_info_t *source)

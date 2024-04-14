@@ -7,6 +7,8 @@
 #include "tss.h"
 #include <stdint.h>
 
+typedef uint32_t gdt_index_t;
+
 // GDT entry metadata
 typedef struct {
     uint32_t base;  // Linear 32-bit address of the start of the segment
@@ -75,8 +77,9 @@ void init_gdt(const tss_t *tss);
 // Encodes the metadata describing a GDT descriptor into a valid entry
 void encode_gdt_entry(gdt_entry_t *dest, const gdt_info_t *source);
 
-// Loads the GDT into the GDTR
+// Loads the GDT into the GDTR and resets the current segment
 // base - Linear 32-bit address of the start of the table
 // limit - 16-bit length of the table in bytes minus 1 to allow for 65536 entries in 16 bits
-// Returns 0 if the GDT is valid
-extern int load_gdt(gdt_entry_t *base, uint16_t limit);
+// code_selector - Index of the kernel code segment selector
+// data_selector - Index of the kernel data segment selector
+extern int load_gdt(gdt_entry_t *base, uint16_t limit, gdt_index_t code_selector, gdt_index_t data_selector);
