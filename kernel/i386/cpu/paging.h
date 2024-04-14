@@ -20,7 +20,7 @@ typedef struct {
 enum PAGE_DIRECTORY_FLAG {
     PAGE_DIRECTORY_FLAG_P   = 1 << 0, // Present
     PAGE_DIRECTORY_FLAG_RW  = 1 << 1, // Read/write
-    PAGE_DIRECTORY_FLAG_US  = 1 << 2, // User/supervisor (set for supervisor)
+    PAGE_DIRECTORY_FLAG_US  = 1 << 2, // User/supervisor (unset for supervisor only)
     PAGE_DIRECTORY_FLAG_PWT = 1 << 3, // Write-through
     PAGE_DIRECTORY_FLAG_PCD = 1 << 4, // Cache disable
     PAGE_DIRECTORY_FLAG_A   = 1 << 5, // Accessed
