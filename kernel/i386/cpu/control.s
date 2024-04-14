@@ -1,6 +1,7 @@
 // Copyright (c) 2024 Natalie Wiggins. All rights reserved.
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+.section .text
 .global read_cr0
 .type read_cr0, @function
 read_cr0:
