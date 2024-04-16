@@ -1,13 +1,10 @@
 Language: Cpp
 BasedOnStyle: LLVM
 
-AlignConsecutiveAssignments: Consecutive
 AlignConsecutiveDeclarations: Consecutive
 AlignConsecutiveBitFields: Consecutive
 AllowShortFunctionsOnASingleLine: None
-AlignTrailingComments:
-  Kind: Always
-  OverEmptyLines: 1
+AlignTrailingComments: true
 BinPackArguments: false
 BinPackParameters: true
 BreakBeforeBraces: Stroustrup
