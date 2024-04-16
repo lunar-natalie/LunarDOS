@@ -4,7 +4,6 @@
 #include "paging.h"
 
 #include "control.h"
-#include <stddef.h>
 
 static uint32_t page_directory[NUM_PAGES] __attribute__((aligned(PAGE_SIZE)));
 static uint32_t page_table[NUM_PAGES] __attribute__((aligned(PAGE_SIZE)));
