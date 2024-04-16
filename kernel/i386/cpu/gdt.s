@@ -16,7 +16,7 @@ load_gdt:
 	mov	%eax, gdtr + 2
 
 	lgdt	gdtr
-
+/*
 	mov	20(%ebp), %eax	// Reset segments with data selector
 	mov	%ax, %ds
 	mov	%ax, %es
@@ -27,7 +27,7 @@ load_gdt:
 	pushl	16(%ebp)	// Push code selector onto the stack as the far pointer
 	push	$.setcs		// Push offset
 	ljmp	*(%esp)		// Far jump to the next instruction
-
+*/
 .setcs:
 	pop	%ebp
 	ret

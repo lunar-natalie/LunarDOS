@@ -15,7 +15,7 @@ void init_paging(void)
 
     // Fill the remaining entries in the page directory
     for(uint32_t i = 1; i < NUM_PAGES; ++i) {
-        page_directory[i] = (uint32_t)0 | PAGE_DIRECTORY_FLAG_RW;
+        page_directory[i] = 0 | PAGE_DIRECTORY_FLAG_RW;
     }
 
     // Map the first 4M of memory to 4K pages in the page table
