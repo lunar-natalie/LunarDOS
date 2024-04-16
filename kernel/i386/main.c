@@ -13,17 +13,17 @@
 
 void kernel_main(void)
 {
-//    static tss_t *tss;
+    static tss_t *tss;
 
-//    init_paging();
+    init_paging();
 //    init_gdt(tss);
 //    tss = init_tss();
 //    load_tss(GDT_INDEX_RING0_TSS, 0);
 //    init_idt();
-    init_tty();
+//    init_tty();
 
     // TODO: Test exception handling when the required components are implemented.
 //    test();
 
-    printf("Loaded\n");
+//    printf("Loaded\n");
 }
