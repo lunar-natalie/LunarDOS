@@ -7,14 +7,14 @@
 #include "tss.h"
 #include <stdint.h>
 
-typedef uint8_t  gdt_entry_t;
+typedef uint8_t gdt_entry_t;
 typedef uint32_t gdt_index_t;
 
 typedef struct {
-    uint32_t base;   // 32-bit physical address of the start of the segment
-    uint32_t limit;  // Maximum 20-bit offset addressable by the segment
-    uint8_t  access; // Access byte
-    uint8_t  flags;  // 4-bit flags attribute
+    uint32_t base;  // 32-bit physical address of the start of the segment
+    uint32_t limit; // Maximum 20-bit offset addressable by the segment
+    uint8_t access; // Access byte
+    uint8_t flags;  // 4-bit flags attribute
 } gdt_info_t;
 
 enum { GDT_MAX_LIMIT = 0xFFFFF };

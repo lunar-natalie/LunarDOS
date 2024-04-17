@@ -10,7 +10,7 @@ struct {
 
 void init_tss(tss_t *tss)
 {
-    tss->ss0  = boot_tss.ss;
+    tss->ss0 = boot_tss.ss;
     tss->esp0 = boot_tss.esp;
     tss->iopb = sizeof(tss);
 }

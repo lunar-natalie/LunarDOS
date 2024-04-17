@@ -5,5 +5,5 @@
 
 #include <stdarg.h>
 
-int printf(const char *restrict format, ...); // Partially implemented
+int printf(const char *restrict format, ...);            // Partially implemented
 int vprintf(const char *restrict format, va_list vlist); // NOLINT

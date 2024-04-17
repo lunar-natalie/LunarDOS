@@ -12,11 +12,11 @@ static gdt_entry_t *gdt[GDT_LENGTH];
 
 // Array of pointers to GDT info structures describing the entry for each segment, excluding the null descriptor
 static gdt_info_t *gdt_info[GDT_LENGTH - 1];
-static gdt_info_t  gdt_ring0_code; // Kernel code segment
-static gdt_info_t  gdt_ring0_data; // Kernel data segment
-static gdt_info_t  gdt_ring3_code; // Userspace code segment
-static gdt_info_t  gdt_ring3_data; // Userspace data segment
-static gdt_info_t  gdt_ring0_tss;  // Task state segment
+static gdt_info_t gdt_ring0_code; // Kernel code segment
+static gdt_info_t gdt_ring0_data; // Kernel data segment
+static gdt_info_t gdt_ring3_code; // Userspace code segment
+static gdt_info_t gdt_ring3_data; // Userspace data segment
+static gdt_info_t gdt_ring0_tss;  // Task state segment
 
 void init_gdt(const tss_t *tss)
 {

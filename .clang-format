@@ -1,7 +1,6 @@
 Language: Cpp
 BasedOnStyle: LLVM
 
-AlignConsecutiveDeclarations: Consecutive
 AlignConsecutiveBitFields: Consecutive
 AllowShortFunctionsOnASingleLine: None
 AlignTrailingComments: true
