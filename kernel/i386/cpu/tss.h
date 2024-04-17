@@ -44,8 +44,9 @@ typedef struct {
     uint32_t ssp;  // Shadow stack pointer
 } __attribute__((packed)) tss_t;
 
-// Initializes the TSS and returns the kernel segment
-tss_t *init_tss();
+// Initializes the kernel TSS
+// tss - Pointer to uninitialized data
+void init_tss(tss_t *tss);
 
 // Loads the TSS at the given index into the GDT into the task register
 // rpl - Requested Privilege Level

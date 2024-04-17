@@ -6,7 +6,8 @@
 #include "tss.h"
 #include <kernel/error.h>
 
-// GDT with one null descriptor, two ring 0 segments, two ring 3 segments and the kernel TSS
+// Flat GDT mapping each segment to the entire virtual address space
+// Consists of the null descriptor, two kernel segments, two userspace segments and the kernel TSS
 static gdt_entry_t *gdt[GDT_LENGTH];
 
 // Array of pointers to GDT info structures describing the entry for each segment, excluding the null descriptor
@@ -67,11 +68,10 @@ void init_gdt(const tss_t *tss)
 
 void encode_gdt_entry(gdt_entry_t *dest, const gdt_info_t *source)
 {
+    // Limit
     if (source->limit > GDT_MAX_LIMIT) {
         kernel_error("Invalid GDT entry limit");
     }
-
-    // Limit
     dest[0] = source->limit & 0xFF;         // Bits 0-7
     dest[1] = (source->limit >> 8) & 0xFF;  // Bits 8-15
     dest[6] = (source->limit >> 16) & 0x0F; // Bits 16-19

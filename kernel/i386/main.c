@@ -11,13 +11,13 @@
 
 //extern void test(void);
 
+static tss_t tss;
+
 void kernel_main(void)
 {
-    static tss_t *tss;
-
     init_paging();
-    init_gdt(tss);
-//    tss = init_tss();
+    init_gdt(&tss);
+//    init_tss(&tss);
 //    load_tss(GDT_INDEX_RING0_TSS, 0);
 //    init_idt();
 //    init_tty();

@@ -26,7 +26,7 @@ load_gdt:
 
 	pushl	16(%ebp)	// Push code selector onto the stack as the far pointer
 	push	$.setcs		// Push offset
-	ljmp	*(%esp)		// Far jump to the next instruction
+	ljmp	*(%ebp)		// Far jump to the next instruction
 */
 .setcs:
 	pop	%ebp
