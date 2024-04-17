@@ -17,9 +17,9 @@ load_gdt:
 
 	lgdt	gdtr
 
-	pushl	16(%ebp)	// Push code selector onto the stack as the far pointer
+	pushl	16(%ebp)	// Push code selector
 	push	$.setcs		// Push offset
-/*	ljmp	*(%esp)		// Load EIP with the offset of .setcs and Far jump to CS:EIP	*/
+/*	ljmp	*(%esp)		// Load EIP with the offset of .setcs and far jump to CS:EIP	*/
 
 .setcs:
 	add	$8, %esp	// Restore stack from far jump
