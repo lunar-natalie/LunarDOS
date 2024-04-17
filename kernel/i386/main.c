@@ -15,6 +15,9 @@ static tss_t tss;
 
 void kernel_main(void)
 {
+    // TODO: Fix GDT and far jump to kernel code segment
+    // TODO: Verify TSS
+    // TODO: Fully implement interrupts
     init_paging();
     init_gdt(&tss);
 //    init_tss(&tss);
@@ -22,7 +25,7 @@ void kernel_main(void)
 //    init_idt();
 //    init_tty();
 
-    // TODO: Test exception handling when the required components are implemented.
+    // TODO: Test exception handling when the required components are implemented
 //    test();
 
 //    printf("Loaded\n");
