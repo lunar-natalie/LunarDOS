@@ -36,7 +36,7 @@ void init_gdt(const tss_t *tss)
 
     // Userspace code segment
     gdt_ring3_code.base = 0;
-    gdt_ring3_code.limit = 0xFFFFF;
+    gdt_ring3_code.limit = GDT_MAX_LIMIT;
     gdt_ring3_code.access = GDT_ACCESS_P | GDT_ACCESS_DPL_3 | GDT_ACCESS_S | GDT_ACCESS_E | GDT_ACCESS_RW;
     gdt_ring3_code.flags = GDT_FLAG_G | GDT_FLAG_DB;
     gdt_info[GDT_INDEX_RING3_CODE - 1] = &gdt_ring3_code;
