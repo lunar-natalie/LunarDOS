@@ -9,9 +9,9 @@ static vga_entry_t *const VGA_BUFFER = (vga_entry_t *)0xb8000;
 
 void init_vga(vga_t *vga)
 {
-    vga->row    = 0;
+    vga->row = 0;
     vga->column = 0;
-    vga->color  = vga_color(VGA_COLOR_LIGHT_GREY, VGA_COLOR_BLACK);
+    vga->color = vga_color(VGA_COLOR_LIGHT_GREY, VGA_COLOR_BLACK);
     vga->buffer = VGA_BUFFER;
 
     // Clear the buffer

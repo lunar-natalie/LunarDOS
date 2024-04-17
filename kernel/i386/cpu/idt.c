@@ -7,7 +7,7 @@
 #include <kernel/error.h>
 
 static idt_entry_t idt[IDT_LENGTH];
-static idt_info_t  idt_info[IDT_LENGTH];
+static idt_info_t idt_info[IDT_LENGTH];
 extern idt_index_t isr_stub_table[IDT_LENGTH];
 
 void init_idt(void)
@@ -26,12 +26,12 @@ void init_idt(void)
 
 void set_isr(idt_index_t index, uint8_t entry_type)
 {
-    idt_info[index].offset          = isr_stub_table[index];
-    idt_info[index].selector        = GDT_INDEX_RING0_CODE;
+    idt_info[index].offset = isr_stub_table[index];
+    idt_info[index].selector = GDT_INDEX_RING0_CODE;
     idt_info[index].type_attributes = entry_type;
 }
 
-void encode_idt_entry(idt_entry_t *dest, const idt_info_t *source)
+void encode_idt_entry(idt_entry_t *dest __attribute__((unused)), const idt_info_t *source __attribute__((unused)))
 {
     // Unimplemented
 }
