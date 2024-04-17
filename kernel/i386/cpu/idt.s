@@ -25,8 +25,10 @@ load_idt:
 1:	mov	$1, %eax	// Fail
 
 2:	pop	%ebp
+	sti
 	ret
 
+.section data
 idtr:
-.word 0         // Offset
-.long 0         // Size
+.word 0         		// Offset
+.long 0         		// Size

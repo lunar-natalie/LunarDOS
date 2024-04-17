@@ -17,11 +17,6 @@ jobs:
         id: env
         run: echo "build-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
 
-      - name: Install APT dependencies
-        run: >
-          sudo apt-get update &&
-          sudo apt-get install -y lsb-release wget software-properties-common gnupg
-
       - name: Configure CMake project
         working-directory: ${{ github.workspace }}
         run: cmake -B ${{ steps.env.outputs.build-dir }} --preset i686-elf-lint
@@ -31,7 +26,7 @@ jobs:
         uses: cpp-linter/cpp-linter-action@v2
         with:
           database: ${{ steps.env.outputs.build-dir }}
-          version: 16     # Clang version
+          version: 11     # Use installed versions
           style: file     # Use .clang-format
           tidy-checks: '' # Use .clang-tidy
           # Only update a single comment in PR threads

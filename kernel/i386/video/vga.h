@@ -9,7 +9,7 @@
 
 typedef uint8_t     vga_color_t;
 typedef uint16_t    vga_entry_t;
-typedef vga_entry_t vga_index_t;
+typedef uint32_t    vga_index_t;
 
 typedef struct {
     vga_index_t  row;
@@ -18,10 +18,12 @@ typedef struct {
     vga_entry_t *buffer;
 } vga_t;
 
-static const vga_index_t VGA_WIDTH;
-static const vga_index_t VGA_HEIGHT;
+enum {
+    VGA_WIDTH  = 80,
+    VGA_HEIGHT = 25
+};
 
-enum vga_color {
+enum VGA_COLOR {
     VGA_COLOR_BLACK         = 0,
     VGA_COLOR_BLUE          = 1,
     VGA_COLOR_GREEN         = 2,
@@ -40,7 +42,7 @@ enum vga_color {
     VGA_COLOR_WHITE         = 15,
 };
 
-static inline vga_color_t vga_color(enum vga_color fg, enum vga_color bg)
+static inline vga_color_t vga_color(enum VGA_COLOR fg, enum VGA_COLOR bg)
 {
     return (vga_color_t)(fg | bg << 4);
 }
@@ -55,7 +57,7 @@ static inline vga_index_t vga_index(vga_index_t x, vga_index_t y)
     return x + (y * VGA_WIDTH);
 }
 
-void vga_init(vga_t *vga);
+void init_vga(vga_t *vga);
 
 void vga_write_ch(vga_t *vga, char ch);
 void vga_write_str(vga_t *vga, const char *str, size_t length);

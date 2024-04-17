@@ -12,11 +12,16 @@ Toolchain with a cross-compiler built for the target platform:
 - [GCC](https://gcc.gnu.org/) >= 8.1.0
 - [Binutils](https://www.gnu.org/software/binutils/) >= 2.41
 
-Bootable media creation:
+Boot media creation:
 
 - [GRUB 2](https://git.savannah.gnu.org/git/grub.git) command-line tools
-  - Runtime dependencies: `xorriso` `mtools`
+  - Runtime dependencies: `xorriso`
   - Build dependencies: `autoconf` `automake` `gawk`
+
+Development tools:
+
+- [ClangFormat](https://releases.llvm.org/11.0.0/tools/clang/docs/ClangFormat.html) >= 11
+- [Clang-Tidy](https://releases.llvm.org/11.0.0/tools/clang/tools/extra/docs/clang-tidy/index.html) >= 11
 
 ## Supported Targets
 

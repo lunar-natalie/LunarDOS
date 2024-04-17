@@ -6,10 +6,8 @@
 #include <string.h>
 
 static vga_entry_t *const VGA_BUFFER = (vga_entry_t *)0xb8000;
-static const vga_index_t  VGA_WIDTH  = 80;
-static const vga_index_t  VGA_HEIGHT = 25;
 
-void vga_init(vga_t *vga)
+void init_vga(vga_t *vga)
 {
     vga->row    = 0;
     vga->column = 0;
@@ -65,7 +63,7 @@ void vga_scroll_line(vga_t *vga)
     static const vga_index_t LAST_ROW = (VGA_HEIGHT - 1) * VGA_WIDTH;
 
     // Copy every character in each row to the same column in the next row, until the final row has been reached.
-    for (uint8_t y = 0; y < VGA_HEIGHT - 1; ++y) {
+    for (vga_index_t y = 0; y < VGA_HEIGHT - 1; ++y) {
         memcpy((void *)(vga->buffer + (y * VGA_WIDTH)),
                (void *)(vga->buffer + ((y + 1) * VGA_WIDTH)),
                VGA_WIDTH * sizeof(uint16_t));

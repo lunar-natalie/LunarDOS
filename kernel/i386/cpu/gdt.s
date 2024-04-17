@@ -5,27 +5,34 @@
 .global load_gdt
 .type load_gdt, @function
 load_gdt:
+	cli
 	push	%ebp
 	mov	%esp, %ebp
 
 	mov	12(%ebp), %ax 	// Limit
-	cmp	$0, %ax
-	je	1f
 	mov	%ax, gdtr
 
 	mov	8(%ebp), %eax	// Base
 	mov	%eax, gdtr + 2
 
 	lgdt	gdtr
+/*
+	mov	20(%ebp), %eax	// Reset segments with data selector
+	mov	%ax, %ds
+	mov	%ax, %es
+	mov	%ax, %gs
+	mov	%ax, %fs
+	mov	%ax, %ss
 
-	xor	%eax, %eax	// Success
-	jmp	2f
-
-1:	mov	$1, %eax	// Fail
-
-2:	pop	%ebp
+	pushl	16(%ebp)	// Push code selector onto the stack as the far pointer
+	push	$.setcs		// Push offset
+	ljmp	*(%esp)		// Load EIP with the offset of .setcs and Far jump to CS:EIP
+*/
+.setcs:
+	pop	%ebp
 	ret
 
+.section data
 gdtr:
 .word 0         // Limit
 .long 0         // Base

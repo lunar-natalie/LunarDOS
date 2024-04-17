@@ -6,61 +6,53 @@
 
 #include <stdint.h>
 
-typedef uint8_t idt_index_t;
-enum { IDT_LENGTH = UINT8_MAX };
+typedef uint8_t idt_entry_t;
+typedef uint32_t idt_index_t;
 
-// IDT entry metadata
 typedef struct {
-    uint32_t offset;          // ISR entry point
-    uint16_t selector;        // Code segment selector pointing to a valid GDT or LDT entry
-    uint8_t  type_attributes; // Type attributes byte
+    uint32_t offset;   // ISR entry point
+    uint16_t selector; // Code segment selector pointing to a valid entry in the GDT/LDT
+    uint8_t  type_attributes;
 } idt_info_t;
 
-// IDT entry data
-typedef struct {
-    unsigned int offset_low      : 16; // Offset bits 0-15
-    unsigned int selector        : 16; // Segment selector
-    unsigned int reserved        : 8;
-    unsigned int type_attributes : 8;  // Type attributes byte
-    unsigned int offset_high     : 16; // Offset bits 16-31
-} __attribute__((packed, aligned(4))) idt_entry_t;
+enum { IDT_LENGTH = 256 };
+enum { IDT_SIZE = sizeof(idt_entry_t) * (IDT_LENGTH - 1) };
 
-enum idt_attributes {
-    // Present bit (must be set for any valid descriptor)
-    IDT_ATTRIB_P = 0b10000000,
-    // Descriptor privilege level (ring 0-3)
-    IDT_ATTRIB_DPL_1 = 0b00100000,
-    IDT_ATTRIB_DPL_2 = 0b01000000,
-    IDT_ATTRIB_DPL_3 = 0b01100000,
+enum IDT_ATTRIBUTE {
     // Gate types
-    IDT_ATTRIB_GATE_TASK   = 0b00000101, // Task gate: IDT offset is unused and should be zero
-    IDT_ATTRIB_GATE_INT16  = 0b00000110, // 16-bit interrupt gate
-    IDT_ATTRIB_GATE_TRAP16 = 0b00000111, // 16-bit trap gate
-    IDT_ATTRIB_GATE_INT32  = 0b00001110, // 32-bit interrupt gate
-    IDT_ATTRIB_GATE_TRAP32 = 0b00001111, // 32-bit trap gate
+    IDT_ATTRIBUTE_TASK   = 0x05, // Task gate (offset is unused and should be set to zero)
+    IDT_ATTRIBUTE_INT16  = 0x06, // 16-bit interrupt gate
+    IDT_ATTRIBUTE_TRAP16 = 0x07, // 16-bit trap gate
+    IDT_ATTRIBUTE_INT32  = 0x0E, // 32-bit interrupt gate
+    IDT_ATTRIBUTE_TRAP32 = 0x0F, // 32-bit trap gate
+    // Descriptor privilege level (ring 0-3)
+    IDT_ATTRIBUTE_DPL_1 = 1 << 5,
+    IDT_ATTRIBUTE_DPL_2 = 1 << 6,
+    IDT_ATTRIBUTE_DPL_3 = IDT_ATTRIBUTE_DPL_1 | IDT_ATTRIBUTE_DPL_2,
+    IDT_ATTRIBUTE_P     = 1 << 7 // Present (must be set for any valid descriptor)
 };
 
-enum idt_types {
-    IDT_TYPE_RING0_TASK   = IDT_ATTRIB_P | IDT_ATTRIB_GATE_TASK,
-    IDT_TYPE_RING0_INT16  = IDT_ATTRIB_P | IDT_ATTRIB_GATE_INT16,
-    IDT_TYPE_RING0_TRAP16 = IDT_ATTRIB_P | IDT_ATTRIB_GATE_TRAP16,
-    IDT_TYPE_RING0_INT32  = IDT_ATTRIB_P | IDT_ATTRIB_GATE_INT32,
-    IDT_TYPE_RING0_TRAP32 = IDT_ATTRIB_P | IDT_ATTRIB_GATE_TRAP32,
-    IDT_TYPE_RING3_INT16  = IDT_ATTRIB_P | IDT_ATTRIB_DPL_3 | IDT_ATTRIB_GATE_INT16,
-    IDT_TYPE_RING3_TRAP16 = IDT_ATTRIB_P | IDT_ATTRIB_DPL_3 | IDT_ATTRIB_GATE_TRAP16,
-    IDT_TYPE_RING3_INT32  = IDT_ATTRIB_P | IDT_ATTRIB_DPL_3 | IDT_ATTRIB_GATE_INT32,
-    IDT_TYPE_RING3_TRAP32 = IDT_ATTRIB_P | IDT_ATTRIB_DPL_3 | IDT_ATTRIB_GATE_TRAP32,
+enum IDT_TYPE {
+    IDT_TYPE_TASK   = IDT_ATTRIBUTE_P | IDT_ATTRIBUTE_TASK,
+    IDT_TYPE_INT16  = IDT_ATTRIBUTE_P | IDT_ATTRIBUTE_INT16,
+    IDT_TYPE_INT32  = IDT_ATTRIBUTE_P | IDT_ATTRIBUTE_INT32,
+    IDT_TYPE_TRAP16 = IDT_ATTRIBUTE_P | IDT_ATTRIBUTE_DPL_3 | IDT_ATTRIBUTE_TRAP16,
+    IDT_TYPE_TRAP32 = IDT_ATTRIBUTE_P | IDT_ATTRIBUTE_DPL_3 | IDT_ATTRIBUTE_TRAP32
 };
 
-// Encodes the default IDT entries and loads the IDT.
-// Must be called after the GDT has been loaded.
-void idt_init(void);
+// Encodes the default IDT entries and loads the IDTR
+// Must be called after the GDT has been loaded
+void init_idt(void);
 
-// Encodes the metadata describing an IDT descriptor into a valid entry.
+// Registers the stub for the given ISR in the IDT
+// entry_type - Type attributes for the IDT entry
+void set_isr(idt_index_t index, uint8_t entry_type);
+
+// Encodes the metadata describing an IDT descriptor into a valid entry
 void encode_idt_entry(idt_entry_t *dest, const idt_info_t *source);
 
-// Loads the IDT into the IDTR.
-// offset - Linear 32-bit address of the start of the table.
-// size - 16-bit length of the table in bytes.
-// Returns 0 if the IDT is valid.
-extern int load_idt(idt_entry_t *offset, uint16_t size);
+// Loads the IDT into the IDTR
+// offset - Linear 32-bit address of the start of the table
+// size - 16-bit length of the table in bytes
+// Returns 0 and sets the interrupt flag if the IDT is valid
+extern int load_idt(uint32_t offset, uint16_t size);

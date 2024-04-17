@@ -8,9 +8,9 @@
 
 static vga_t vga;
 
-void tty_init(void)
+void init_tty(void)
 {
-    vga_init(&vga);
+    init_vga(&vga);
 }
 
 void tty_putc(char ch)
