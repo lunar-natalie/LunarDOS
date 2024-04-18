@@ -5,6 +5,7 @@
 
 #include "tss.h"
 #include <kernel/error.h>
+#include <string.h>
 
 // Flat GDT mapping where the entire virtual address space is mapped for each segment
 // Consists of the null descriptor, two kernel segments, two userspace segments and the kernel TSS
@@ -55,13 +56,17 @@ void init_gdt(const tss_t *tss)
     gdt_ring0_tss.flags = 0;
     gdt_info[GDT_INDEX_RING0_TSS - 1] = &gdt_ring0_tss;
 
+    // Clear null descriptor
+    memset(gdt, 0, GDT_ENTRY_SIZE * sizeof(gdt_entry_t));
+
     // Encode entries
     for (gdt_index_t i = 1; i < GDT_LENGTH; ++i) {
         encode_gdt_entry(gdt + (i * GDT_ENTRY_SIZE), gdt_info[i - 1]);
     }
 
     // Load into GDTR and update the current segment
-    load_gdt((uint32_t)gdt, GDT_LENGTH - 1, GDT_INDEX_RING0_CODE * GDT_ENTRY_SIZE, GDT_INDEX_RING0_DATA * GDT_ENTRY_SIZE);
+    load_gdt(
+        (uint32_t)gdt, GDT_LENGTH - 1, GDT_INDEX_RING0_CODE * GDT_ENTRY_SIZE, GDT_INDEX_RING0_DATA * GDT_ENTRY_SIZE);
 }
 
 void encode_gdt_entry(gdt_entry_t *dest, const gdt_info_t *source)
