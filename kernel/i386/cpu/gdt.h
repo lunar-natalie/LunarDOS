@@ -8,7 +8,7 @@
 #include <stdint.h>
 
 typedef uint8_t gdt_entry_t;
-typedef uint32_t gdt_index_t;
+typedef uint16_t gdt_index_t;
 
 typedef struct {
     uint32_t base;  // 32-bit physical address of the start of the segment
@@ -17,16 +17,20 @@ typedef struct {
     uint8_t flags;  // 4-bit flags attribute
 } gdt_info_t;
 
-enum { GDT_MAX_LIMIT = 0xFFFFF };
-
 enum GDT_INDEX {
-    GDT_INDEX_NULL = 0,
+    GDT_INDEX_NULL __attribute__((unused)),
     GDT_INDEX_RING0_CODE,
     GDT_INDEX_RING0_DATA,
     GDT_INDEX_RING3_CODE,
     GDT_INDEX_RING3_DATA,
     GDT_INDEX_RING0_TSS,
     GDT_LENGTH
+};
+
+enum {
+    GDT_MAX_ENTRY_LIMIT = 0xFFFFF,
+    GDT_ENTRY_SIZE = sizeof(uint64_t) / sizeof(gdt_entry_t),
+    GDT_SIZE = GDT_LENGTH * GDT_ENTRY_SIZE
 };
 
 enum GDT_ACCESS {
@@ -48,6 +52,21 @@ enum GDT_ACCESS {
     GDT_ACCESS_DPL_3 = GDT_ACCESS_DPL_1 | GDT_ACCESS_DPL_2,
 
     GDT_ACCESS_P = 1 << 7 // Present (must be set for any valid segment)
+};
+
+// Access flags for system segments
+enum GDT_ACCESS_SYSTEM {
+    // Types (protected mode)
+    GDT_ACCESS_SYSTEM_TSS16_AVL = 0x1,  // 16-bit TSS (available)
+    GDT_ACCESS_SYSTEM_LDT = 0x2,        // LDT
+    GDT_ACCESS_SYSTEM_TSS16_BUSY = 0x3, // 16-bit TSS (busy)
+    GDT_ACCESS_SYSTEM_TSS32_AVL = 0x9,  // 32-bit TSS (available)
+    GDT_ACCESS_SYSTEM_TSS32_BUSY = 0xB, // 32-bit TSS (busy)
+
+    GDT_ACCESS_SYSTEM_DPL_1 = GDT_ACCESS_DPL_1,
+    GDT_ACCESS_SYSTEM_DPL_2 = GDT_ACCESS_DPL_2,
+    GDT_ACCESS_SYSTEM_DPL_3 = GDT_ACCESS_DPL_3,
+    GDT_ACCESS_SYSTEM_P = GDT_ACCESS_P
 };
 
 enum GDT_FLAG {

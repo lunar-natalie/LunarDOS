@@ -22,7 +22,7 @@ load_gdt:
 /*	ljmp	*(%esp)		// Load EIP with the offset of .setcs and far jump to CS:EIP	*/
 
 .setcs:
-	add	$8, %esp	// Restore stack from far jump
+	add	$8, %esp	// Restore stack after far jump
 /*
 	mov	20(%ebp), %eax	// Reload segments with data selector
 	mov	%ax, %ds
