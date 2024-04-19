@@ -9,4 +9,4 @@ typedef struct {
     int patch;
 } version_t;
 
-__attribute__((unused)) static const version_t KERNEL_VERSION;
+static const version_t __attribute__((unused)) KERNEL_VERSION;

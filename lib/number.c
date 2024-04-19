@@ -1,13 +1,9 @@
 // Copyright (c) 2024 Natalie Wiggins. All rights reserved.
 // SPDX-License-Identifier: GPL-3.0-only
 
-#include "numeric.h"
+#include "number.h"
 
 #include <limits.h>
-
-// void itoa(int input, char *buffer, int radix)
-// {
-// }
 
 int digits(int n)
 {

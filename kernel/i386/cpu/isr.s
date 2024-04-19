@@ -12,19 +12,19 @@ isr_stub_\irq:
 
 .macro isr_exception_stub irq
 .align 4
-.extern kernel_exception_handler
+.extern exception_handler
 isr_stub_\irq:
 	cld			// DF must be clear on function entry
-	call	kernel_exception_handler
+	call	exception_handler
 	iret
 .endm
 
 .macro isr_exception_error_stub irq
 .align 4
-.extern kernel_exception_handler
+.extern exception_handler
 isr_stub_\irq:
 	cld
-	call	kernel_exception_handler
+	call	exception_handler
 	sub	$8, %esp	// Pop error code
 	iret
 .endm

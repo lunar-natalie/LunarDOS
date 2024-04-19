@@ -2,7 +2,7 @@
 
 add_library(Libc
         memory.c
-        numeric.c
+        number.c
         printf.c
         string.c
 )

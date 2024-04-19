@@ -13,7 +13,7 @@ target_sources(Kernel PRIVATE
         cpu/tss.s
         exception.c
         main.c
-        tty.c
+        console.c
         video/vga.c
 )
 
