@@ -46,7 +46,7 @@ typedef struct {
 
 // Initializes the kernel TSS
 // tss - Pointer to uninitialized data
-void init_tss(tss_t *tss);
+void tss_init(tss_t *tss);
 
 // Loads the TSS at the given index into the GDT into the task register
 // rpl - Requested Privilege Level

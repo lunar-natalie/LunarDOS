@@ -10,7 +10,7 @@ static idt_entry_t idt[IDT_LENGTH];
 static idt_info_t idt_info[IDT_LENGTH];
 extern idt_index_t isr_stub_table[IDT_LENGTH];
 
-void init_idt(void)
+void idt_init(void)
 {
     // Fill IDT and encode metadata
     for (idt_index_t i = 0; i < 32; ++i) {
@@ -20,7 +20,7 @@ void init_idt(void)
 
     // Load into IDTR
     if (load_idt((uint32_t)idt, IDT_SIZE) != 0) {
-        kernel_error("Failed to load IDT\n");
+        kerror("Failed to load IDT\n");
     }
 }
 

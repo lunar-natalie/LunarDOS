@@ -35,7 +35,7 @@ _start:
 	mov	%esp, boot_tss + 4
 
 	// Enter C kernel
-	call	kernel_main
+	call	kmain
 
 .size _start, . - _start	// Set symbol size for debugging
 
@@ -46,9 +46,9 @@ _end:
 	jmp	1b
 
 // Panic
-.global kernel_exit
-.type kernel_exit, @function
-kernel_exit:
+.global kexit
+.type kexit, @function
+kexit:
 	jmp     _end
 
 /*

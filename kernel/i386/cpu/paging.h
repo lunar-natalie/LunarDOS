@@ -28,4 +28,4 @@ enum PAGE_TABLE_FLAG {
 
 enum { NUM_PAGES = 1024, PAGE_SIZE = 0x1000 };
 
-void init_paging(void);
+void paging_init(void);

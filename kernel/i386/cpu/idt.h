@@ -42,7 +42,7 @@ enum IDT_TYPE {
 
 // Encodes the default IDT entries and loads the IDTR
 // Must be called after the GDT has been loaded
-void init_idt(void);
+void idt_init(void);
 
 // Registers the stub for the given ISR in the IDT
 // entry_type - Type attributes for the IDT entry

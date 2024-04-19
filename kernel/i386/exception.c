@@ -5,5 +5,5 @@
 
 void __attribute__((noreturn, unused)) kernel_exception_handler(void)
 {
-    kernel_exit();
+    kexit();
 }

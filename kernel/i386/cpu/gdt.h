@@ -77,7 +77,7 @@ enum GDT_FLAG {
 
 // Encodes the default GDT entries and loads the GDT
 // tss - Pointer to the kernel TSS
-void init_gdt(const tss_t *tss);
+void gdt_init(const tss_t *tss);
 
 // Encodes the metadata describing a GDT descriptor into a valid entry
 void encode_gdt_entry(uint64_t *dest, const gdt_info_t *source);

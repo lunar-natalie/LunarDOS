@@ -11,7 +11,7 @@
 // Consists of the null descriptor, two kernel segments, two userspace segments and the kernel TSS
 static uint64_t gdt[GDT_SIZE] __attribute__((aligned(GDT_ENTRY_SIZE)));
 
-void init_gdt(const tss_t *tss)
+void gdt_init(const tss_t *tss)
 {
     // Array of pointers to GDT info structures describing the entry for each segment, excluding the null descriptor
     gdt_info_t *gdt_info[GDT_LENGTH - 1];
@@ -73,7 +73,7 @@ void encode_gdt_entry(uint64_t *dest, const gdt_info_t *source)
 {
     // Limit
     if (source->limit > GDT_MAX_ENTRY_LIMIT) {
-        kernel_error("Invalid GDT entry limit");
+        kerror("Invalid GDT entry limit");
     }
     dest[0] = source->limit & 0xFF;         // Bits 0-7
     dest[1] = (source->limit >> 8) & 0xFF;  // Bits 8-15

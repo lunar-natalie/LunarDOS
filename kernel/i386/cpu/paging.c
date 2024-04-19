@@ -9,7 +9,7 @@
 static uint32_t page_directory[NUM_PAGES] __attribute__((aligned(PAGE_SIZE)));
 static uint32_t page_table[NUM_PAGES] __attribute__((aligned(PAGE_SIZE)));
 
-void init_paging(void)
+void paging_init(void)
 {
     // Set the first page directory entry to point to the page table
     page_directory[0] = (uint32_t)page_table | PAGE_DIRECTORY_FLAG_P | PAGE_DIRECTORY_FLAG_RW;
