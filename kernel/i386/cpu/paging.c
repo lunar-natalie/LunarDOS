@@ -3,7 +3,7 @@
 
 #include "paging.h"
 
-#include "control.h"
+#include "cr.h"
 
 // Identity paging setup for the first 4M, split into 4K pages
 static uint32_t page_directory[NUM_PAGES] __attribute__((aligned(PAGE_SIZE)));
