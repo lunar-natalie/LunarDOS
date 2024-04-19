@@ -16,14 +16,14 @@ load_gdt:
 	mov	%eax, gdtr + 2
 
 	lgdt	gdtr
-
+/*
 	pushl	16(%ebp)	// Push code selector
 	push	$.setcs		// Push offset
-/*	ljmp	*(%esp)		// Load EIP with the offset of .setcs and far jump to CS:EIP	*/
+	ljmp	*(%esp)		// Load EIP with the offset of .setcs and far jump to CS:EIP
 
 .setcs:
 	add	$8, %esp	// Restore stack after far jump
-/*
+
 	mov	20(%ebp), %eax	// Reload segments with data selector
 	mov	%ax, %ds
 	mov	%ax, %es

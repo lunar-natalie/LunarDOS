@@ -65,8 +65,7 @@ void gdt_init(const tss_t *tss)
     }
 
     // Load into GDTR and update the current segment
-    load_gdt(
-        (uint32_t)gdt, GDT_LENGTH - 1, GDT_INDEX_RING0_CODE * GDT_ENTRY_SIZE, GDT_INDEX_RING0_DATA * GDT_ENTRY_SIZE);
+    load_gdt((uint32_t)gdt, GDT_SIZE - 1, GDT_INDEX_RING0_CODE * GDT_ENTRY_SIZE, GDT_INDEX_RING0_DATA * GDT_ENTRY_SIZE);
 }
 
 void encode_gdt_entry(uint64_t *dest, const gdt_info_t *source)
