@@ -15,7 +15,7 @@ typedef struct {
 } gdt_info_t;
 
 enum GDT_INDEX {
-    GDT_INDEX_NULL __attribute__((unused)),
+    GDT_INDEX_NULL,
     GDT_INDEX_RING0_CODE,
     GDT_INDEX_RING0_DATA,
     GDT_INDEX_RING3_CODE,
