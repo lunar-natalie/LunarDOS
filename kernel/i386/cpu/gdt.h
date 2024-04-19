@@ -7,9 +7,6 @@
 #include "tss.h"
 #include <stdint.h>
 
-typedef uint8_t gdt_entry_t;
-typedef uint16_t gdt_index_t;
-
 typedef struct {
     uint32_t base;  // 32-bit physical address of the start of the segment
     uint32_t limit; // Maximum 20-bit offset addressable by the segment
@@ -28,9 +25,9 @@ enum GDT_INDEX {
 };
 
 enum {
-    GDT_MAX_ENTRY_LIMIT = 0xFFFFF,
-    GDT_ENTRY_SIZE = sizeof(uint64_t) / sizeof(gdt_entry_t),
-    GDT_SIZE = GDT_LENGTH * GDT_ENTRY_SIZE
+    GDT_MAX_ENTRY_LIMIT = 0xFFFFF, // Maximum limit for a GDT entry
+    GDT_ENTRY_SIZE = 8, // Size of each GDT entry in bytes
+    GDT_SIZE = GDT_LENGTH * GDT_ENTRY_SIZE // Size of the GDT in bytes
 };
 
 enum GDT_ACCESS {
@@ -83,7 +80,7 @@ enum GDT_FLAG {
 void init_gdt(const tss_t *tss);
 
 // Encodes the metadata describing a GDT descriptor into a valid entry
-void encode_gdt_entry(gdt_entry_t *dest, const gdt_info_t *source);
+void encode_gdt_entry(uint64_t *dest, const gdt_info_t *source);
 
 // Loads the GDT into the GDTR and resets the current segment
 // base - Linear 32-bit address of the start of the table

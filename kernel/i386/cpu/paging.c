@@ -6,8 +6,8 @@
 #include "control.h"
 
 // Identity paging setup for the first 4M, split into 4K pages
-static page_entry_t page_directory[NUM_PAGES] __attribute__((aligned(PAGE_SIZE)));
-static page_entry_t page_table[NUM_PAGES] __attribute__((aligned(PAGE_SIZE)));
+static uint32_t page_directory[NUM_PAGES] __attribute__((aligned(PAGE_SIZE)));
+static uint32_t page_table[NUM_PAGES] __attribute__((aligned(PAGE_SIZE)));
 
 void init_paging(void)
 {
@@ -15,13 +15,12 @@ void init_paging(void)
     page_directory[0] = (uint32_t)page_table | PAGE_DIRECTORY_FLAG_P | PAGE_DIRECTORY_FLAG_RW;
 
     // Fill the remaining entries in the page directory
-    for (page_entry_t i = 1; i < NUM_PAGES; ++i) {
+    for (uint32_t i = 1; i < NUM_PAGES; ++i) {
         page_directory[i] = 0 | PAGE_DIRECTORY_FLAG_RW;
     }
 
     // Fill the page table
-    uint32_t address = 0;
-    for (page_entry_t i = 0; i < NUM_PAGES; ++i) {
+    for (uint32_t i = 0, address = 0; i < NUM_PAGES; ++i) {
         page_table[i] = address | PAGE_TABLE_FLAG_P | PAGE_DIRECTORY_FLAG_RW;
         address += PAGE_SIZE;
     }

@@ -3,10 +3,6 @@
 
 #pragma once
 
-#include <stdint.h>
-
-typedef uint32_t page_entry_t;
-
 enum PAGE_DIRECTORY_FLAG {
     PAGE_DIRECTORY_FLAG_P = 1 << 0,   // Present
     PAGE_DIRECTORY_FLAG_RW = 1 << 1,  // Read/write
