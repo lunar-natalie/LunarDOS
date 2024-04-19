@@ -21,13 +21,13 @@ enum GDT_INDEX {
     GDT_INDEX_RING3_CODE,
     GDT_INDEX_RING3_DATA,
     GDT_INDEX_RING0_TSS,
-    GDT_LENGTH
+    GDT_NUM_ENTRIES
 };
 
 enum {
     GDT_MAX_ENTRY_LIMIT = 0xFFFFF, // Maximum limit for a GDT entry
     GDT_ENTRY_SIZE = 8, // Size of each GDT entry in bytes
-    GDT_SIZE = GDT_LENGTH * GDT_ENTRY_SIZE // Size of the GDT in bytes
+    GDT_SIZE = GDT_NUM_ENTRIES * GDT_ENTRY_SIZE // Size of the GDT in bytes
 };
 
 enum GDT_ACCESS {

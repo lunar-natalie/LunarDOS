@@ -14,7 +14,7 @@ static uint64_t gdt[GDT_SIZE] __attribute__((aligned(GDT_ENTRY_SIZE)));
 void gdt_init(const tss_t *tss)
 {
     // Array of pointers to GDT info structures describing the entry for each segment, excluding the null descriptor
-    gdt_info_t *gdt_info[GDT_LENGTH - 1];
+    gdt_info_t *gdt_info[GDT_NUM_ENTRIES - 1];
 
     // Kernel code segment
     gdt_info_t gdt_ring0_code;
@@ -60,7 +60,7 @@ void gdt_init(const tss_t *tss)
     memset(gdt, 0, GDT_ENTRY_SIZE * sizeof(uint64_t));
 
     // Encode entries
-    for (uint16_t i = 1; i < GDT_LENGTH; ++i) {
+    for (uint16_t i = 1; i < GDT_NUM_ENTRIES; ++i) {
         encode_gdt_entry(gdt + (i * GDT_ENTRY_SIZE), gdt_info[i - 1]);
     }
 
