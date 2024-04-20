@@ -75,7 +75,7 @@ enum GDT_FLAG {
     GDT_FLAG_G = 1 << 3
 };
 
-// Encodes the GDT entries, loads the GDTR and jumps to the kernel segment
+// Encodes the GDT entries, loads the GDTR and updates the current segment
 // tss - Pointer to the kernel TSS
 void gdt_init(const tss_t *tss);
 
