@@ -22,20 +22,22 @@ int vprintf(const char *restrict format, va_list vlist) // NOLINT
     int result = 0;
     while (*format != '\0') {
         if (*format == '%') {
-            char specifier = *++format;
+            // Format specifier
+            char spec = *++format;
+
             // char
-            if (specifier == 'c') {
+            if (spec == 'c') {
                 int value = va_arg(vlist, int);
                 putc(value);
                 ++result;
             }
             // string
-            else if (specifier == 's') {
+            else if (spec == 's') {
                 char *value = va_arg(vlist, char *);
                 result += puts(value);
             }
             // int (unimplemented)
-            else if (specifier == 'd' || specifier == 'i') {
+            else if (spec == 'd' || spec == 'i') {
                 //                int value = va_arg(vlist, int);
                 //                char *buffer = ...
                 //                // Parse negatives
@@ -48,14 +50,14 @@ int vprintf(const char *restrict format, va_list vlist) // NOLINT
                 //                result += puts(buffer);
             }
             // octal (unimplemented)
-            else if (specifier == 'o') {
+            else if (spec == 'o') {
                 //                unsigned int value = va_arg(vlist, unsigned int);
                 //                char *buffer = ...
                 //                itoa(value, buffer, 8);
                 //                result += puts(buffer);
             }
             // hex (unimplemented)
-            else if (specifier == 'x') {
+            else if (spec == 'x') {
                 //                unsigned int value = va_arg(vlist, unsigned int);
                 //                char *buffer = ...
                 //                itoa(value, buffer, 16);
