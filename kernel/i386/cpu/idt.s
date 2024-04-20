@@ -9,9 +9,6 @@ load_idt:
 	mov	%esp, %ebp
 
 	mov	12(%ebp), %ax 	// Size
-
-	cmp	$0, %ax
-	je	1f
 	mov	%ax, idtr
 
 	mov	8(%ebp), %eax	// Offset
@@ -19,16 +16,11 @@ load_idt:
 
 	lidt	idtr
 
-	xor	%eax, %eax	// Success
-	jmp	2f
-
-1:	mov	$1, %eax	// Fail
-
-2:	pop	%ebp
+	pop	%ebp
 	sti
 	ret
 
 .section data
 idtr:
-.word 0         		// Offset
-.long 0         		// Size
+.word 0         		// Size
+.long 0         		// Offset

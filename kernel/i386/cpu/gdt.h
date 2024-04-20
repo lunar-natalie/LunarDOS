@@ -26,7 +26,7 @@ enum GDT_INDEX {
 
 enum {
     GDT_MAX_ENTRY_LIMIT = 0xFFFFF,              // Maximum limit for a GDT entry
-    GDT_ENTRY_SIZE = 8,                         // Size of each GDT entry in bytes
+    GDT_ENTRY_SIZE = sizeof(uint64_t),          // Size of each GDT entry in bytes
     GDT_SIZE = GDT_NUM_ENTRIES * GDT_ENTRY_SIZE // Size of the GDT in bytes
 };
 
@@ -75,14 +75,14 @@ enum GDT_FLAG {
     GDT_FLAG_G = 1 << 3
 };
 
-// Encodes the default GDT entries and loads the GDT
+// Encodes the GDT entries, loads the GDTR and jumps to the kernel segment
 // tss - Pointer to the kernel TSS
 void gdt_init(const tss_t *tss);
 
 // Encodes the metadata describing a GDT descriptor into a valid entry
 void encode_gdt_entry(uint64_t *dest, const gdt_info_t *source);
 
-// Loads the GDT into the GDTR and resets the current segment
+// Loads the GDT into the GDTR and updates the current segment
 // base - Linear address of the start of the table
 // limit - Length of the table in bytes minus 1 to allow for a maximum limit of 65536 bytes
 // code_selector - Kernel code segment selector
