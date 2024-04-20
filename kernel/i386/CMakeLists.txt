@@ -2,7 +2,8 @@
 
 target_sources(Kernel PRIVATE
         boot.s
-        cpu/control.s
+        console.c
+        cpu/cr.s
         cpu/gdt.c
         cpu/gdt.s
         cpu/idt.c
@@ -13,7 +14,6 @@ target_sources(Kernel PRIVATE
         cpu/tss.s
         exception.c
         main.c
-        tty.c
         video/vga.c
 )
 

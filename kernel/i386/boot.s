@@ -16,7 +16,7 @@
 .long FLAGS
 .long CHECKSUM
 
-// Stack (16K, 16-byte alignment)
+// Stack (16K, 16-byte aligned)
 .section .bss
 .align 16
 stack_bottom:
@@ -35,7 +35,7 @@ _start:
 	mov	%esp, boot_tss + 4
 
 	// Enter C kernel
-	call	kernel_main
+	call	kmain
 
 .size _start, . - _start	// Set symbol size for debugging
 
@@ -46,21 +46,7 @@ _end:
 	jmp	1b
 
 // Panic
-.global kernel_exit
-.type kernel_exit, @function
-kernel_exit:
+.global kexit
+.type kexit, @function
+kexit:
 	jmp     _end
-
-/*
-.global test
-.type test, @function
-test:
-	push	%eax
-	push	%ebx
-	mov	$1, %eax
-	mov	$0, %ebx
-	div	%ebx
-	pop	%ebx
-	pop	%eax
-	ret
-*/

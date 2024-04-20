@@ -4,5 +4,5 @@
 
 #pragma once
 
-void itoa(int input, char *buffer, int radix);
+void itoa(int input, char *buffer, int radix); // Unimplemented
 int digits(int n);

@@ -7,15 +7,11 @@
 #include <stddef.h>
 #include <stdint.h>
 
-typedef uint8_t vga_color_t;
-typedef uint16_t vga_entry_t;
-typedef uint32_t vga_index_t;
-
 typedef struct {
-    vga_index_t row;
-    vga_index_t column;
-    vga_color_t color;
-    vga_entry_t *buffer;
+    unsigned int row;
+    unsigned int column;
+    uint8_t color;
+    uint16_t *buffer;
 } vga_t;
 
 enum { VGA_WIDTH = 80, VGA_HEIGHT = 25 };
@@ -39,17 +35,17 @@ enum VGA_COLOR {
     VGA_COLOR_WHITE = 15,
 };
 
-static inline vga_color_t vga_color(enum VGA_COLOR fg, enum VGA_COLOR bg)
+static inline uint8_t vga_color(enum VGA_COLOR fg, enum VGA_COLOR bg)
 {
-    return (vga_color_t)(fg | bg << 4);
+    return (uint8_t)(fg | bg << 4);
 }
 
-static inline vga_entry_t vga_entry(unsigned char data, vga_color_t color)
+static inline uint16_t vga_entry(unsigned char data, uint8_t color)
 {
-    return (vga_entry_t)data | (vga_entry_t)color << 8;
+    return (uint16_t)data | (color << 8);
 }
 
-static inline vga_index_t vga_index(vga_index_t x, vga_index_t y)
+static inline unsigned long vga_index(unsigned int x, unsigned int y)
 {
     return x + (y * VGA_WIDTH);
 }
@@ -59,6 +55,6 @@ void init_vga(vga_t *vga);
 void vga_write_ch(vga_t *vga, char ch);
 void vga_write_str(vga_t *vga, const char *str, size_t length);
 
-void vga_put_entry(vga_t *vga, char ch, vga_color_t color, vga_index_t x, vga_index_t y);
+void vga_put_entry(vga_t *vga, char ch, uint8_t color, unsigned int x, unsigned int y);
 void vga_next_line(vga_t *vga);
 void vga_scroll_line(vga_t *vga);

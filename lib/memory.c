@@ -3,16 +3,21 @@
 
 #include <string.h>
 
-// void *malloc(size_t size)
-// {
-// }
+void *memset(void *dest, int ch, size_t count)
+{
+    char *ch_dest = (char *)dest;
+    for (size_t i = 0; i < count; ++i) {
+        ch_dest[i] = ch;
+    }
+    return dest;
+}
 
 void *memcpy(void *restrict dest, const void *restrict src, size_t count)
 {
-    char *c_dest = (char *)dest;
-    const char *c_src = (char *)src;
+    char *ch_dest = (char *)dest;
+    const char *ch_src = (char *)src;
     for (size_t i = 0; i < count; ++i) {
-        c_dest[i] = c_src[i];
+        ch_dest[i] = ch_src[i];
     }
     return dest;
 }

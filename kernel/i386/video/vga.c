@@ -5,7 +5,7 @@
 
 #include <string.h>
 
-static vga_entry_t *const VGA_BUFFER = (vga_entry_t *)0xb8000;
+static uint16_t *const VGA_BUFFER = (uint16_t *)0xb8000;
 
 void init_vga(vga_t *vga)
 {
@@ -15,14 +15,14 @@ void init_vga(vga_t *vga)
     vga->buffer = VGA_BUFFER;
 
     // Clear the buffer
-    for (vga_index_t y = 0; y < VGA_HEIGHT; ++y) {
-        for (vga_index_t x = 0; x < VGA_WIDTH; ++x) {
+    for (unsigned int y = 0; y < VGA_HEIGHT; ++y) {
+        for (unsigned int x = 0; x < VGA_WIDTH; ++x) {
             vga->buffer[vga_index(x, y)] = vga_entry('\0', vga->color);
         }
     }
 }
 
-void vga_put_entry(vga_t *vga, char ch, vga_color_t color, vga_index_t x, vga_index_t y)
+void vga_put_entry(vga_t *vga, char ch, uint8_t color, unsigned int x, unsigned int y)
 {
     vga->buffer[vga_index(x, y)] = vga_entry(ch, color);
 }
@@ -60,17 +60,17 @@ void vga_next_line(vga_t *vga)
 
 void vga_scroll_line(vga_t *vga)
 {
-    static const vga_index_t LAST_ROW = (VGA_HEIGHT - 1) * VGA_WIDTH;
+    static const unsigned int LAST_ROW = (VGA_HEIGHT - 1) * VGA_WIDTH;
 
     // Copy every character in each row to the same column in the next row, until the final row has been reached.
-    for (vga_index_t y = 0; y < VGA_HEIGHT - 1; ++y) {
+    for (unsigned int y = 0; y < VGA_HEIGHT - 1; ++y) {
         memcpy((void *)(vga->buffer + (y * VGA_WIDTH)),
                (void *)(vga->buffer + ((y + 1) * VGA_WIDTH)),
                VGA_WIDTH * sizeof(uint16_t));
     }
 
     // Clear the last row
-    for (vga_index_t i = LAST_ROW; i < LAST_ROW + VGA_WIDTH; ++i) {
+    for (unsigned long i = LAST_ROW; i < LAST_ROW + VGA_WIDTH; ++i) {
         vga->buffer[i] = 0;
     }
 }

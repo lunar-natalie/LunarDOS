@@ -3,12 +3,12 @@
 
 #pragma once
 
-#include <kernel/tty.h>
+#include <kernel/console.h>
 
-extern void __attribute__((noreturn)) kernel_exit(void);
+extern void __attribute__((noreturn)) kexit(void);
 
-static inline void __attribute__((noreturn)) kernel_error(const char *message)
+static inline void __attribute__((noreturn)) kerror(const char *msg)
 {
-    tty_puts(message);
-    kernel_exit();
+    puts(msg);
+    kexit();
 }

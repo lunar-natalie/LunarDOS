@@ -6,27 +6,19 @@
 #include "cpu/idt.h"
 #include "cpu/paging.h"
 #include "cpu/tss.h"
-#include <kernel/tty.h>
+#include <kernel/console.h>
 #include <stdio.h>
-
-// extern void test(void);
 
 static tss_t tss;
 
-void kernel_main(void)
+void kmain(void)
 {
-    // TODO: Fix GDT in order to far jump to kernel code segment
-    // TODO: Verify TSS implementation
-    // TODO: Implement interrupts
-    init_paging();
-    init_gdt(&tss);
-    //    init_tss(&tss);
+    // TODO: Fix GDT and enable interrupts
+    paging_init();
+    gdt_init(&tss);
+    //    tss_init(&tss);
     //    load_tss(GDT_INDEX_RING0_TSS, 0);
-    //    init_idt();
-    init_tty();
-
-    // TODO: Test exception handling when the required components are implemented
-    //    test();
-
+    //    idt_init();
+    console_init();
     printf("Loaded\n");
 }

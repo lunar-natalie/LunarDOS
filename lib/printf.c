@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 
-#include <kernel/tty.h>
+#include <kernel/console.h>
 
 int printf(const char *restrict format, ...)
 {
@@ -26,13 +26,13 @@ int vprintf(const char *restrict format, va_list vlist) // NOLINT
             // char
             if (specifier == 'c') {
                 int value = va_arg(vlist, int);
-                tty_putc(value);
+                putc(value);
                 ++result;
             }
             // string
             else if (specifier == 's') {
                 char *value = va_arg(vlist, char *);
-                result += tty_puts(value);
+                result += puts(value);
             }
             // int (unimplemented)
             else if (specifier == 'd' || specifier == 'i') {
@@ -45,25 +45,25 @@ int vprintf(const char *restrict format, va_list vlist) // NOLINT
                 //                    ++buffer;
                 //                }
                 //                itoa(value, buffer, 10);
-                //                result += tty_puts(buffer);
+                //                result += puts(buffer);
             }
             // octal (unimplemented)
             else if (specifier == 'o') {
                 //                unsigned int value = va_arg(vlist, unsigned int);
                 //                char *buffer = ...
                 //                itoa(value, buffer, 8);
-                //                result += tty_puts(buffer);
+                //                result += puts(buffer);
             }
             // hex (unimplemented)
             else if (specifier == 'x') {
                 //                unsigned int value = va_arg(vlist, unsigned int);
                 //                char *buffer = ...
                 //                itoa(value, buffer, 16);
-                //                result += tty_puts(buffer);
+                //                result += puts(buffer);
             }
         }
         else {
-            tty_putc(*format);
+            putc(*format);
             ++result;
         }
         ++format;
