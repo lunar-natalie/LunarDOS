@@ -56,4 +56,4 @@ void encode_idt_entry(uint64_t *dest, const idt_info_t *source);
 // Loads the IDT into the IDTR and sets the interrupt flag
 // offset - Linear address of the start of the table
 // size - Length of the table in bytes
-extern int load_idt(uint32_t offset, uint16_t size);
+extern void load_idt(uint32_t offset, uint16_t size);
