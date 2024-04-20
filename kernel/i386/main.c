@@ -14,11 +14,11 @@ static tss_t tss;
 void kmain(void)
 {
     // TODO: Fix GDT and enable interrupts
+    console_init();
     paging_init();
     gdt_init(&tss);
     //    tss_init(&tss);
     //    load_tss(GDT_INDEX_RING0_TSS, 0);
     //    idt_init();
-    console_init();
     printf("Loaded\n");
 }
