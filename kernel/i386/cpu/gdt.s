@@ -17,21 +17,25 @@ load_gdt:
 
 	lgdt	gdtr
 
-	pushl	16(%ebp)	// Push code selector
-	pushl	$setcs		// Push offset
-//	ljmp	*(%esp)		// Load EIP with the offset of .setcs and far jump to CS:EIP
+	xor	%ecx, %ecx
+	xor	%edx, %edx
+	mov	16(%ebp), %cx	// Code segment
+	mov	20(%ebp), %dx	// Data segment
+	pop	%ebp		// Restore stack before segment reset
 
-setcs:
+	push	%ecx		// Push CS
+	push	$.setcs		// Push offset
+/*	ljmp	*(%esp)		// Load EIP with the offset of .setcs and far jump to CS:EIP !	*/
+
+.setcs:
 	add	$8, %esp	// Restore stack after far jump
 /*
-	mov	20(%ebp), %eax	// Reload segments with data selector
-	mov	%ax, %ds
-	mov	%ax, %es
-	mov	%ax, %gs
-	mov	%ax, %fs
-	mov	%ax, %ss
+	mov	%dx, %ds	// Reload segments with data selector
+	mov	%dx, %es
+	mov	%dx, %gs
+	mov	%dx, %fs
+	mov	%dx, %ss
 */
-	pop	%ebp
 	ret
 
 .section data
