@@ -16,7 +16,7 @@
 .long FLAGS
 .long CHECKSUM
 
-// Stack (16K, 16-byte alignment)
+// Stack (16K, 16-byte aligned)
 .section .bss
 .align 16
 stack_bottom:
@@ -50,17 +50,3 @@ _end:
 .type kexit, @function
 kexit:
 	jmp     _end
-
-/*
-.global test
-.type test, @function
-test:
-	push	%eax
-	push	%ebx
-	mov	$1, %eax
-	mov	$0, %ebx
-	div	%ebx
-	pop	%ebx
-	pop	%eax
-	ret
-*/
