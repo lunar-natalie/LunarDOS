@@ -84,7 +84,7 @@ void encode_gdt_entry(uint64_t *dest, const gdt_info_t *source);
 
 // Loads the GDT into the GDTR and updates the current segment
 // base - Linear address of the start of the table
-// limit - Length of the table in bytes minus 1 to allow for a maximum limit of 65536 bytes
+// limit - Length of the table in bytes minus 1 to allow for a maximum effective limit of 65536 bytes
 // code_selector - Kernel code segment selector
 // data_selector - Kernel data segment selector
 extern void load_gdt(uint32_t base, uint16_t limit, uint16_t code_selector, uint16_t data_selector);
