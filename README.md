@@ -21,7 +21,7 @@ Boot media creation:
 Development tools:
 
 - [ClangFormat](https://releases.llvm.org/11.0.0/tools/clang/docs/ClangFormat.html) >= 11
-- [Clang-Tidy](https://releases.llvm.org/11.0.0/tools/clang/tools/extra/docs/clang-tidy/index.html) >= 11
+- [ClangTidy](https://releases.llvm.org/11.0.0/tools/clang/tools/extra/docs/clang-tidy/index.html) >= 11
 
 ## Supported Targets
 
