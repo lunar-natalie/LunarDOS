@@ -9,15 +9,15 @@
 #include <kernel/console.h>
 #include <stdio.h>
 
-static tss_t tss;
-
 void kmain(void)
 {
+    static tss_t tss;
+
     console_init();
     paging_init();
     gdt_init(&tss);
-    tss_init(&tss);
-    load_tss(GDT_SEL_TSS_PL0, 0);
+    tss_init(&tss, GDT_SEL_TSS_PL0);
     idt_init();
+
     printf("Loaded\n");
 }

@@ -46,7 +46,8 @@ typedef struct {
 
 // Initializes the kernel TSS
 // tss - Pointer to uninitialized data
-void tss_init(tss_t *tss);
+// selector - Segment selector of the kernel TSS in the GDT
+void tss_init(tss_t *tss, uint16_t selector);
 
 // Loads the TSS into the task register
 // selector - Segment selector of the TSS in the GDT
