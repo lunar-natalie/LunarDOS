@@ -4,5 +4,5 @@
 
 #pragma once
 
-// void itoa(int input, char *buffer, int radix);
 int digits(int n);
+// void itoa(int input, char *buffer, int radix);

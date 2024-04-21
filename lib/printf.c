@@ -38,30 +38,30 @@ int vprintf(const char *restrict format, va_list vlist) // NOLINT
             }
             // int (unimplemented)
             else if (spec == 'd' || spec == 'i') {
-                //                int value = va_arg(vlist, int);
-                //                char *buffer = ...
-                //                // Parse negatives
-                //                if (value < 0) {
-                //                    value     = -value;
-                //                    buffer[0] = '-';
-                //                    ++buffer;
-                //                }
-                //                itoa(value, buffer, 10);
-                //                result += puts(buffer);
+                //    int value = va_arg(vlist, int);
+                //    char *buffer = ...
+                //    // Parse negatives
+                //    if (value < 0) {
+                //        value     = -value;
+                //        buffer[0] = '-';
+                //        ++buffer;
+                //    }
+                //    itoa(value, buffer, 10);
+                //    result += puts(buffer);
             }
             // octal (unimplemented)
             else if (spec == 'o') {
-                //                unsigned int value = va_arg(vlist, unsigned int);
-                //                char *buffer = ...
-                //                itoa(value, buffer, 8);
-                //                result += puts(buffer);
+                //    unsigned int value = va_arg(vlist, unsigned int);
+                //    char *buffer = ...
+                //    itoa(value, buffer, 8);
+                //    result += puts(buffer);
             }
             // hex (unimplemented)
             else if (spec == 'x') {
-                //                unsigned int value = va_arg(vlist, unsigned int);
-                //                char *buffer = ...
-                //                itoa(value, buffer, 16);
-                //                result += puts(buffer);
+                //    unsigned int value = va_arg(vlist, unsigned int);
+                //    char *buffer = ...
+                //    itoa(value, buffer, 16);
+                //    result += puts(buffer);
             }
         }
         else {
