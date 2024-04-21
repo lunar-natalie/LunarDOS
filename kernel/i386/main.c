@@ -14,6 +14,7 @@ void kmain(void)
     static tss_t tss;
 
     console_init();
+
     paging_init();
     gdt_init(&tss);
     tss_init(&tss, GDT_SEL_TSS_PL0);
