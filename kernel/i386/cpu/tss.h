@@ -48,7 +48,8 @@ typedef struct {
 // tss - Pointer to uninitialized data
 void tss_init(tss_t *tss);
 
-// Loads the TSS at the given index into the GDT into the task register
+// Loads the TSS into the task register
+// selector - Segment selector of the TSS in the GDT
 // rpl - Requested Privilege Level
 // Must be called after the GDT has been loaded
-extern void load_tss(uint8_t gdt_index, uint16_t rpl);
+extern void load_tss(uint16_t selector, uint16_t rpl);

@@ -7,20 +7,13 @@
 #include "tss.h"
 #include <stdint.h>
 
-typedef struct {
-    uint32_t base;  // Physical address of the start of the segment
-    uint32_t limit; // Maximum 20-bit offset addressable by the segment
-    uint8_t access; // Access byte
-    uint8_t flags;  // 4-bit flags attribute
-} gdt_info_t;
-
 enum GDT_INDEX {
-    GDT_INDEX_NULL,
-    GDT_INDEX_RING0_CODE,
-    GDT_INDEX_RING0_DATA,
-    GDT_INDEX_RING3_CODE,
-    GDT_INDEX_RING3_DATA,
-    GDT_INDEX_RING0_TSS,
+    GDT_INDEX_NULL __attribute__((unused)),
+    GDT_INDEX_CODE_PL0,
+    GDT_INDEX_DATA_PL0,
+    GDT_INDEX_CODE_PL3,
+    GDT_INDEX_DATA_PL3,
+    GDT_INDEX_TSS_PL0,
     GDT_NUM_ENTRIES
 };
 
@@ -75,16 +68,50 @@ enum GDT_FLAG {
     GDT_FLAG_G = 1 << 3
 };
 
-// Encodes the GDT entries, loads the GDTR and jumps to the kernel segment
+// Entry types
+enum GDT_TYPE {
+    GDT_CODE_PL0_ACCESS = GDT_ACCESS_P | GDT_ACCESS_S | GDT_ACCESS_RW | GDT_ACCESS_E,
+    GDT_CODE_PL0_FLAGS = GDT_FLAG_G | GDT_FLAG_DB,
+
+    GDT_DATA_PL0_ACCESS = GDT_ACCESS_P | GDT_ACCESS_S | GDT_ACCESS_RW,
+    GDT_DATA_PL0_FLAGS = GDT_FLAG_G | GDT_FLAG_DB,
+
+    GDT_CODE_PL3_ACCESS = GDT_ACCESS_P | GDT_ACCESS_S | GDT_ACCESS_RW | GDT_ACCESS_E | GDT_ACCESS_DPL_3,
+    GDT_CODE_PL3_FLAGS = GDT_FLAG_G | GDT_FLAG_DB,
+
+    GDT_DATA_PL3_ACCESS = GDT_ACCESS_P | GDT_ACCESS_S | GDT_ACCESS_RW | GDT_ACCESS_DPL_3,
+    GDT_DATA_PL3_FLAGS = GDT_FLAG_G | GDT_FLAG_DB,
+
+    GDT_TSS_PL0_ACCESS = GDT_ACCESS_SYSTEM_P | GDT_ACCESS_SYSTEM_TSS32_AVL,
+    GDT_TSS_PL0_FLAGS = 0
+};
+
+// Segment selectors
+enum GDT_SEL {
+    GDT_SEL_CODE_PL0 = GDT_ENTRY_SIZE * GDT_INDEX_CODE_PL0,
+    GDT_SEL_DATA_PL0 = GDT_ENTRY_SIZE * GDT_INDEX_DATA_PL0,
+
+    GDT_SEL_CODE_PL3 = GDT_ENTRY_SIZE * GDT_INDEX_CODE_PL3,
+    GDT_SEL_DATA_PL3 = GDT_ENTRY_SIZE * GDT_INDEX_DATA_PL3,
+
+    GDT_SEL_TSS_PL0 = GDT_ENTRY_SIZE * GDT_INDEX_TSS_PL0
+};
+
+// Encodes the GDT entries, loads the GDTR and updates the current segment
 // tss - Pointer to the kernel TSS
 void gdt_init(const tss_t *tss);
 
-// Encodes the metadata describing a GDT descriptor into a valid entry
-void encode_gdt_entry(uint64_t *dest, const gdt_info_t *source);
+// Encodes the attributes describing a GDT descriptor into a valid entry
+// selector - Segment selector of the destination entry in the GDT
+// base - Physical address of the start of the segment
+// limit - Maximum 20-bit offset addressable by the segment
+// access - Access byte
+// flags - Flags attribute (4 bits)
+void encode_gdt_entry(uint16_t selector, uint32_t base, uint32_t limit, uint8_t access, uint8_t flags);
 
 // Loads the GDT into the GDTR and updates the current segment
 // base - Linear address of the start of the table
-// limit - Length of the table in bytes minus 1 to allow for a maximum effective limit of 65536 bytes
+// limit - Length of the table in bytes minus 1 to allow for a maximum effective limit of 65536 bytes (8192 entries)
 // code_selector - Kernel code segment selector
 // data_selector - Kernel data segment selector
 extern void load_gdt(uint32_t base, uint16_t limit, uint16_t code_selector, uint16_t data_selector);

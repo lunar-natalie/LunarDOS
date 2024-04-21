@@ -25,17 +25,17 @@ load_gdt:
 
 	push	%ecx		// Push CS
 	push	$.setcs		// Push offset
-/*	ljmp	*(%esp)		// Load EIP with the offset of .setcs and far jump to CS:EIP	*/
+	ljmp	*(%esp)		// Load EIP with the offset of .setcs and far jump to CS:EIP
 
 .setcs:
 	add	$8, %esp	// Restore stack after far jump
-/*
+
 	mov	%dx, %ds	// Reload segments with data selector
 	mov	%dx, %es
 	mov	%dx, %gs
 	mov	%dx, %fs
 	mov	%dx, %ss
-*/
+
 	ret
 
 .section data
