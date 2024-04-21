@@ -24,7 +24,7 @@ void idt_init(void)
 void set_isr(uint16_t index, uint8_t entry_type)
 {
     idt_info[index].offset = isr_stub_table[index];
-    idt_info[index].selector = GDT_SS_CODE_PL0;
+    idt_info[index].selector = GDT_SEL_CODE_PL0;
     idt_info[index].type_attributes = entry_type;
 }
 

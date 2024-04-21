@@ -87,9 +87,14 @@ enum GDT_TYPE {
 };
 
 // Segment selectors
-enum GDT_SS {
-    GDT_SS_CODE_PL0 = GDT_ENTRY_SIZE * GDT_INDEX_CODE_PL0,
-    GDT_SS_DATA_PL0 = GDT_ENTRY_SIZE * GDT_INDEX_DATA_PL0
+enum GDT_SEL {
+    GDT_SEL_CODE_PL0 = GDT_ENTRY_SIZE * GDT_INDEX_CODE_PL0,
+    GDT_SEL_DATA_PL0 = GDT_ENTRY_SIZE * GDT_INDEX_DATA_PL0,
+
+    GDT_SEL_CODE_PL3 = GDT_ENTRY_SIZE * GDT_INDEX_CODE_PL3,
+    GDT_SEL_DATA_PL3 = GDT_ENTRY_SIZE * GDT_INDEX_DATA_PL3,
+
+    GDT_SEL_TSS_PL0 = GDT_ENTRY_SIZE * GDT_INDEX_TSS_PL0
 };
 
 // Encodes the GDT entries, loads the GDTR and updates the current segment
@@ -97,12 +102,12 @@ enum GDT_SS {
 void gdt_init(const tss_t *tss);
 
 // Encodes the metadata describing a GDT descriptor into a valid entry
-// index - Index of the destination entry in the GDT
+// selector - Segment selector of the destination entry in the GDT
 // base - Physical address of the start of the segment
 // limit - Maximum 20-bit offset addressable by the segment
 // access - Access byte
 // flags - Flags attribute (4 bits)
-void encode_gdt_entry(uint16_t index, uint32_t base, uint32_t limit, uint8_t access, uint8_t flags);
+void encode_gdt_entry(uint16_t selector, uint32_t base, uint32_t limit, uint8_t access, uint8_t flags);
 
 // Loads the GDT into the GDTR and updates the current segment
 // base - Linear address of the start of the table

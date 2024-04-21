@@ -3,7 +3,6 @@
 
 #include "gdt.h"
 
-#include "tss.h"
 #include <kernel/error.h>
 #include <string.h>
 
@@ -17,28 +16,28 @@ void gdt_init(const tss_t *tss)
     memset(gdt, 0, GDT_ENTRY_SIZE);
 
     // Kernel code segment
-    encode_gdt_entry(GDT_INDEX_CODE_PL0, 0, GDT_MAX_ENTRY_LIMIT, GDT_CODE_PL0_ACCESS, GDT_CODE_PL0_FLAGS);
+    encode_gdt_entry(GDT_SEL_CODE_PL0, 0, GDT_MAX_ENTRY_LIMIT, GDT_CODE_PL0_ACCESS, GDT_CODE_PL0_FLAGS);
     // Kernel data segment
-    encode_gdt_entry(GDT_INDEX_DATA_PL0, 0, GDT_MAX_ENTRY_LIMIT, GDT_DATA_PL0_ACCESS, GDT_DATA_PL0_FLAGS);
+    encode_gdt_entry(GDT_SEL_DATA_PL0, 0, GDT_MAX_ENTRY_LIMIT, GDT_DATA_PL0_ACCESS, GDT_DATA_PL0_FLAGS);
     // Userspace code segment
-    encode_gdt_entry(GDT_INDEX_CODE_PL3, 0, GDT_MAX_ENTRY_LIMIT, GDT_CODE_PL3_ACCESS, GDT_CODE_PL3_FLAGS);
+    encode_gdt_entry(GDT_SEL_CODE_PL3, 0, GDT_MAX_ENTRY_LIMIT, GDT_CODE_PL3_ACCESS, GDT_CODE_PL3_FLAGS);
     // Userspace data segment
-    encode_gdt_entry(GDT_INDEX_DATA_PL3, 0, GDT_MAX_ENTRY_LIMIT, GDT_DATA_PL3_ACCESS, GDT_DATA_PL3_FLAGS);
+    encode_gdt_entry(GDT_SEL_DATA_PL3, 0, GDT_MAX_ENTRY_LIMIT, GDT_DATA_PL3_ACCESS, GDT_DATA_PL3_FLAGS);
     // Task state segment
-    encode_gdt_entry(GDT_INDEX_TSS_PL0, (uint32_t)tss, sizeof(tss_t) - 1, GDT_TSS_PL0_ACCESS, GDT_TSS_PL0_FLAGS);
+    encode_gdt_entry(GDT_SEL_TSS_PL0, (uint32_t)tss, sizeof(tss_t) - 1, GDT_TSS_PL0_ACCESS, GDT_TSS_PL0_FLAGS);
 
     // Load entries into the GDTR and update the segment registers
-    load_gdt((uint32_t)gdt, GDT_SIZE - 1, GDT_SS_CODE_PL0, GDT_SS_DATA_PL0);
+    load_gdt((uint32_t)gdt, GDT_SIZE - 1, GDT_SEL_CODE_PL0, GDT_SEL_DATA_PL0);
 }
 
-void encode_gdt_entry(uint16_t index, uint32_t base, uint32_t limit, uint8_t access, uint8_t flags)
+void encode_gdt_entry(uint16_t selector, uint32_t base, uint32_t limit, uint8_t access, uint8_t flags)
 {
     if (limit > GDT_MAX_ENTRY_LIMIT) {
         kerror("Invalid GDT entry limit");
     }
 
     // Destination entry (8 bytes)
-    uint8_t *entry = gdt + index;
+    uint8_t *entry = gdt + selector;
 
     // Encode limit
     entry[0] = limit & 0xFF;         // Bits 0-7
