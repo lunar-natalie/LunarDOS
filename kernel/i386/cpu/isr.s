@@ -45,6 +45,7 @@ isr_table_entry %i
 .set i, i + 1
 .endr
 
+
 .section .text
 
 // Exceptions (0-31)
