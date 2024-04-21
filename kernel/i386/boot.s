@@ -29,7 +29,7 @@ stack_top:
 .type _start, @function
 .extern boot_tss
 _start:
-	// Initialize stack and save into the the task state segment for ring zero
+	// Initialize stack and save into the the task state segment for PL0
 	mov	$stack_top, %esp
 	mov	%ss, boot_tss
 	mov	%esp, boot_tss + 4
