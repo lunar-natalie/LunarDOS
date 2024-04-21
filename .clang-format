@@ -2,8 +2,9 @@ Language: Cpp
 BasedOnStyle: LLVM
 
 AlignConsecutiveBitFields: Consecutive
-AllowShortFunctionsOnASingleLine: None
 AlignTrailingComments: true
+AllowShortEnumsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: None
 BinPackArguments: false
 BinPackParameters: true
 BreakBeforeBraces: Stroustrup

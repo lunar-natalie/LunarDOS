@@ -5,9 +5,9 @@
 
 #include <kernel/console.h>
 
-extern void __attribute__((noreturn)) kexit(void);
+extern __attribute__((noreturn)) void kexit(void);
 
-static inline void __attribute__((noreturn)) kerror(const char *msg)
+static inline __attribute__((noreturn)) void kerror(const char *msg)
 {
     puts(msg);
     kexit();

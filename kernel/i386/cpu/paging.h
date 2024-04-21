@@ -26,6 +26,9 @@ enum PAGE_TABLE_FLAG {
     PAGE_TABLE_FLAG_G = 1 << 8    // Global
 };
 
-enum { NUM_PAGES = 1024, PAGE_SIZE = 0x1000 };
+enum {
+    NUM_PAGES = 1024,
+    PAGE_SIZE = 0x1000
+};
 
 void paging_init(void);

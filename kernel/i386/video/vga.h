@@ -14,7 +14,10 @@ typedef struct {
     uint16_t *buffer;
 } vga_t;
 
-enum { VGA_WIDTH = 80, VGA_HEIGHT = 25 };
+enum {
+    VGA_WIDTH = 80,
+    VGA_HEIGHT = 25
+};
 
 enum VGA_COLOR {
     VGA_COLOR_BLACK = 0,
