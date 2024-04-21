@@ -6,12 +6,6 @@
 
 #include <stdint.h>
 
-typedef struct {
-    uint32_t offset;   // ISR entry point
-    uint16_t selector; // Code segment selector pointing to a valid entry in the GDT/LDT
-    uint8_t type_attributes;
-} idt_info_t;
-
 enum {
     IDT_NUM_ENTRIES = 256,
     IDT_ENTRY_SIZE = sizeof(uint64_t),
@@ -46,12 +40,12 @@ enum IDT_TYPE {
 // Must be called after the GDT has been loaded
 void idt_init(void);
 
-// Registers the stub for the given ISR in the IDT
-// entry_type - Type attributes for the IDT entry
-void set_isr(uint16_t index, uint8_t entry_type);
-
-// Encodes the metadata describing an IDT descriptor into a valid entry
-void encode_idt_entry(uint64_t *dest, const idt_info_t *source);
+// Encodes the attributes describing an IDT descriptor into a valid entry
+// selector - Destination selector in the IDT
+// offset - ISR entry point
+// gdt_selector - Code segment selector pointing to a valid entry in the GDT/LDT
+// type - Entry type flags
+void encode_idt_entry(uint16_t selector, uint32_t offset, uint16_t gdt_selector, uint8_t type);
 
 // Loads the IDT into the IDTR and sets the interrupt flag
 // offset - Linear address of the start of the table

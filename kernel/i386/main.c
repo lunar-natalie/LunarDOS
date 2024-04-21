@@ -13,12 +13,11 @@ static tss_t tss;
 
 void kmain(void)
 {
-    // TODO: Enable interrupts
     console_init();
     paging_init();
     gdt_init(&tss);
     tss_init(&tss);
     load_tss(GDT_SEL_TSS_PL0, 0);
-    //    idt_init();
+    idt_init();
     printf("Loaded\n");
 }

@@ -4,31 +4,40 @@
 #include "idt.h"
 
 #include "gdt.h"
+#include <string.h>
 
-static uint64_t idt[IDT_NUM_ENTRIES];
-static idt_info_t idt_info[IDT_NUM_ENTRIES];
+static uint8_t idt[IDT_SIZE] __attribute__((aligned(IDT_ENTRY_SIZE)));
 extern uint32_t isr_stub_table[IDT_NUM_ENTRIES];
 
 void idt_init(void)
 {
-    // Fill IDT and encode metadata
+    // Encode exception ISRs
     for (uint16_t i = 0; i < 32; ++i) {
-        set_isr(i, IDT_TYPE_INT32);
-        encode_idt_entry(idt + i, idt_info + i);
+        encode_idt_entry(i * IDT_ENTRY_SIZE, isr_stub_table[i], GDT_SEL_CODE_PL0, IDT_TYPE_INT32);
     }
+
+    // Fill the rest of the IDT with null entries
+    memset(idt + (32 * IDT_ENTRY_SIZE), 0, (IDT_NUM_ENTRIES - 32) * IDT_ENTRY_SIZE);
 
     // Load into IDTR and enable interrupts
     load_idt((uint32_t)idt, IDT_SIZE);
 }
 
-void set_isr(uint16_t index, uint8_t entry_type)
+void encode_idt_entry(uint16_t selector, uint32_t offset, uint16_t gdt_selector, uint8_t type)
 {
-    idt_info[index].offset = isr_stub_table[index];
-    idt_info[index].selector = GDT_SEL_CODE_PL0;
-    idt_info[index].type_attributes = entry_type;
-}
+    // Destination entry (8 bytes)
+    uint8_t *dest = idt + selector;
 
-void encode_idt_entry(uint64_t *dest __attribute__((unused)), const idt_info_t *source __attribute__((unused)))
-{
-    // Unimplemented
+    // Encode offset
+    dest[0] = offset & 0xFF;         // Bits 0-7
+    dest[1] = (offset >> 8) & 0xFF;  // Bits 8-15
+    dest[6] = (offset >> 16) & 0xFF; // Bits 16-23
+    dest[7] = (offset >> 24) & 0xFF; // Bits 23-31
+
+    // Encode GDT selector
+    dest[2] = gdt_selector & 0xFF;        // Bits 0-7
+    dest[3] = (gdt_selector >> 8) & 0xFF; // Bits 8-15
+
+    // Encode type
+    dest[5] = type;
 }

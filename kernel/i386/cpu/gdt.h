@@ -101,7 +101,7 @@ enum GDT_SEL {
 // tss - Pointer to the kernel TSS
 void gdt_init(const tss_t *tss);
 
-// Encodes the metadata describing a GDT descriptor into a valid entry
+// Encodes the attributes describing a GDT descriptor into a valid entry
 // selector - Segment selector of the destination entry in the GDT
 // base - Physical address of the start of the segment
 // limit - Maximum 20-bit offset addressable by the segment
