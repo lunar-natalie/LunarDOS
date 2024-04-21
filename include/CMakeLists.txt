@@ -1,8 +1,9 @@
-# Include directory
+# Base include directory
 
 target_sources(Libc PUBLIC FILE_SET HEADERS
-        BASE_DIRS ${CMAKE_SOURCE_DIR}
         FILES
         stdio.h
         string.h
 )
+
+add_subdirectory(kernel)
