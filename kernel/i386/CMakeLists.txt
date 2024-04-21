@@ -14,7 +14,7 @@ target_sources(Kernel PRIVATE
         exception.c
         loader.s
         main.c
-        video/vga.c
+        vga.c
 )
 
 if(ENABLE_TESTS)

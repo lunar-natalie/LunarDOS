@@ -4,8 +4,8 @@
 
 #pragma once
 
-#include "tss.h"
 #include <stdint.h>
+#include <kernel/i386/cpu/tss.h>
 
 enum GDT_INDEX {
     GDT_INDEX_NULL,

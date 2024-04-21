@@ -1,9 +1,9 @@
 // Copyright (c) 2024 Natalie Wiggins. All rights reserved.
 // SPDX-License-Identifier: GPL-3.0-only
 
-#include "paging.h"
+#include <kernel/i386/cpu/paging.h>
 
-#include "cr.h"
+#include <kernel/i386/cpu/cr.h>
 
 // Identity paging setup for the first 4M, split into 4K pages
 static uint32_t page_directory[NUM_PAGES] __attribute__((aligned(PAGE_SIZE)));

@@ -1,7 +1,7 @@
 // Copyright (c) 2024 Natalie Wiggins. All rights reserved.
 // SPDX-License-Identifier: GPL-3.0-only
 
-#include "gdt.h"
+#include <kernel/i386/cpu/gdt.h>
 
 #include <kernel/error.h>
 #include <string.h>

@@ -3,7 +3,7 @@
 
 #include <kernel/console.h>
 
-#include "video/vga.h"
+#include <kernel/i386/vga.h>
 #include <string.h>
 
 static vga_t vga;
