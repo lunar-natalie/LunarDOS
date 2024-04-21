@@ -8,7 +8,7 @@ load_tss:
 	push	%ebp
 	mov	%esp, %ebp
 
-	// Load TSS selector corresponding to the given GDT entry
+	// Load the TSS selector corresponding to the given GDT entry
 	mov	12(%ebp), %ax		// GDT selector
 	or	%ax, 8(%ebp)		// RPL
         ltr	%ax			// Load selector into task register
