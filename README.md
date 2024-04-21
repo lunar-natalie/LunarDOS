@@ -1,4 +1,4 @@
-# Operating System
+# LunarDOS
 
 ![CMake](https://github.com/lunar-natalie/os/actions/workflows/cmake.yml/badge.svg)
 ![Linter](https://github.com/lunar-natalie/os/actions/workflows/linter.yml/badge.svg)
