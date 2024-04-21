@@ -3,7 +3,7 @@
 
 #include <kernel/error.h>
 
-void __attribute__((noreturn, unused)) exception_handler(void)
+void __attribute__((noreturn)) exception_handler(void)
 {
     kexit();
 }

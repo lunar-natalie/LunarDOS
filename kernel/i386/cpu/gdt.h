@@ -8,7 +8,7 @@
 #include <stdint.h>
 
 enum GDT_INDEX {
-    GDT_INDEX_NULL __attribute__((unused)),
+    GDT_INDEX_NULL,
     GDT_INDEX_CODE_PL0,
     GDT_INDEX_DATA_PL0,
     GDT_INDEX_CODE_PL3,
