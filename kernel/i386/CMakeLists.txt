@@ -1,7 +1,6 @@
 # Kernel sources for i386
 
 target_sources(Kernel PRIVATE
-        boot.s
         console.c
         cpu/cr.s
         cpu/gdt.c
@@ -13,6 +12,7 @@ target_sources(Kernel PRIVATE
         cpu/tss.c
         cpu/tss.s
         exception.c
+        loader.s
         main.c
         video/vga.c
 )
