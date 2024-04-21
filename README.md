@@ -1,7 +1,7 @@
 # LunarDOS
 
-![CMake](https://github.com/lunar-natalie/os/actions/workflows/cmake.yml/badge.svg)
-![Linter](https://github.com/lunar-natalie/os/actions/workflows/linter.yml/badge.svg)
+![CMake](https://github.com/lunar-natalie/LunarDOS/actions/workflows/cmake.yml/badge.svg)
+![Linter](https://github.com/lunar-natalie/LunarDOS/actions/workflows/linter.yml/badge.svg)
 
 ## Build Requirements
 
