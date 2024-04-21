@@ -62,10 +62,10 @@ void vga_scroll_line(vga_t *vga)
 {
     static const unsigned int LAST_ROW = (VGA_HEIGHT - 1) * VGA_WIDTH;
 
-    // Copy every character in each row to the same column in the next row, until the final row has been reached.
+    // Copy each character in each row to the next row, until the final row has been reached
     for (unsigned int y = 0; y < VGA_HEIGHT - 1; ++y) {
-        memcpy((void *)(vga->buffer + (y * VGA_WIDTH)),
-               (void *)(vga->buffer + ((y + 1) * VGA_WIDTH)),
+        memcpy((void *)(vga->buffer + (VGA_WIDTH * y)),
+               (void *)(vga->buffer + (VGA_WIDTH * (y + 1))),
                VGA_WIDTH * sizeof(uint16_t));
     }
 
