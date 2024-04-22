@@ -14,6 +14,7 @@ target_sources(Kernel PRIVATE
         exception.c
         loader.s
         main.c
+        mm.c
         vga.c
 )
 

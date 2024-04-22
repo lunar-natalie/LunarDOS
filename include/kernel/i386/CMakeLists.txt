@@ -7,5 +7,6 @@ target_sources(Kernel PUBLIC FILE_SET HEADERS
         cpu/idt.h
         cpu/paging.h
         cpu/tss.h
+        mm.h
         vga.h
 )

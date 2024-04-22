@@ -2,11 +2,12 @@
 // Copyright (c) 2024 Natalie Wiggins. All rights reserved.
 // SPDX-License-Identifier: GPL-3.0-only
 
+#include <kernel/console.h>
 #include <kernel/i386/cpu/gdt.h>
 #include <kernel/i386/cpu/idt.h>
 #include <kernel/i386/cpu/paging.h>
 #include <kernel/i386/cpu/tss.h>
-#include <kernel/console.h>
+#include <kernel/i386/mm.h>
 #include <stdio.h>
 
 void kmain(void)
@@ -19,6 +20,7 @@ void kmain(void)
     gdt_init(&tss);
     tss_init(&tss, GDT_SEL_TSS_PL0);
     idt_init();
+    kalloc_init();
 
     printf("Loaded\n");
 }
