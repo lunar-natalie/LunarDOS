@@ -3,5 +3,5 @@
 
 #pragma once
 
-// Initializes the frame map for the kernel heap
-void kalloc_init(void);
+// Initializes the page frame allocator and virtual memory manager
+void mm_init(void);

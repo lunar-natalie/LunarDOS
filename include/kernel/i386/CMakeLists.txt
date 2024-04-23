@@ -10,5 +10,6 @@ target_sources(Kernel PUBLIC FILE_SET HEADERS
         mm/frame.h
         mm/init.h
         mm/paging.h
+        mm/vm.h
         vga.h
 )

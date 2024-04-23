@@ -6,19 +6,14 @@
 
 #include <kernel/i386/mm/defs.h>
 #include <stddef.h>
-#include <stdint.h>
+
+// Initializes the frame map for the kernel heap
+void init_page_frames(void);
 
 // Allocates a frame on the kernel heap
-// Returns the base address of the allocated frame, or -1 if the heap is full
-size_t kalloc_frame(void);
+// Returns the base address of the allocated frame, or 0 if allocation failed
+size_t alloc_frame(void);
 
 // Marks the pages in the given frame as free on the kernel heap
 // frame - Base address of a previously allocated frame
-void kfree_frame(size_t frame);
-
-// 1M heap of 4K pages split into 8 frames per map entry (1 frame per bit)
-enum {
-    FRAME_MAP_SIZE = NUM_HEAP_PAGES / sizeof(uint8_t)
-};
-extern const size_t heap;
-static uint8_t frame_map[FRAME_MAP_SIZE];
+void free_frame(size_t frame);
