@@ -27,7 +27,9 @@ enum PAGE_TABLE_FLAG {
 };
 
 enum {
-    NUM_PAGES = 1024,
+    NUM_CODE_PAGES = 0x300,
+    NUM_HEAP_PAGES = 0x100,
+    NUM_PAGES = NUM_CODE_PAGES + NUM_HEAP_PAGES,
     PAGE_SIZE = 0x1000
 };
 

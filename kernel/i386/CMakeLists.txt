@@ -8,13 +8,13 @@ target_sources(Kernel PRIVATE
         cpu/idt.c
         cpu/idt.s
         cpu/isr.s
-        cpu/paging.c
+        mm/paging.c
         cpu/tss.c
         cpu/tss.s
         exception.c
         loader.s
         main.c
-        mm.c
+        mm/alloc.c
         vga.c
 )
 
