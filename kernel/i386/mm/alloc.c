@@ -56,13 +56,13 @@ static size_t kalloc_next_frame(void)
         }
     }
 
-    frame_map[p_frame] |= FRAME_USED << bit; // Mark page as used
+    frame_map[p_frame] |= FRAME_USED << bit; // Mark frame as used
     return heap + (p_frame * PAGE_SIZE); // Return the address of the next frame
 }
 
 void kfree_frame(size_t frame)
 {
-    frame -= heap; // Get offset from first frame
+    frame -= heap; // Get offset from the first frame on the heap
     size_t p_frame = frame / PAGE_SIZE;
     frame_map[p_frame] = FRAME_FREE;
 }
