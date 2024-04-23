@@ -17,8 +17,8 @@ Toolchain with a cross-compiler built for the target platform:
 Boot media creation:
 
 - [GRUB 2](https://git.savannah.gnu.org/git/grub.git) command line tools
-  - Runtime dependencies: `xorriso`
-  - Build dependencies: `autoconf` `automake` `gawk`
+    - Runtime dependencies: `xorriso`
+    - Build dependencies: `autoconf` `automake` `gawk`
 
 Development tools:
 

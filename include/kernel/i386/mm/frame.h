@@ -6,21 +6,17 @@
 
 #include <kernel/i386/mm/paging.h>
 #include <stddef.h>
-#include <stdint.h>
 
 enum {
-    FRAME_FREE = 0,
-    FRAME_USED = 1,
+    FREE = 0,
+    USED = 1,
 
     // Maximum number of frames which can be allocated before allocating a new set of pre-frames
     PRE_FRAME_LIMIT = 20
 };
 
-// Initializes the kernel heap frame map
-void kalloc_init(void);
-
 // Allocates a frame on the kernel heap
-// Returns the base address of the allocated frame, or ERROR_FAILURE if the heap is full
+// Returns the base address of the allocated frame, or -1 if the heap is full
 size_t kalloc_frame(void);
 
 // Marks the pages in the given frame as free on the kernel heap

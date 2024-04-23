@@ -1,11 +1,11 @@
 // Copyright (c) 2024 Natalie Wiggins. All rights reserved.
 // SPDX-License-Identifier: GPL-3.0-only
 
-#include <kernel/i386/mm/alloc.h>
+#include <kernel/i386/mm/frame.h>
 
-#include <kernel/defs.h>
-#include <string.h>
 #include <stdbool.h>
+#include <stdint.h>
+#include <string.h>
 
 // 1M heap of 4K pages split into 8 frames per map entry (1 frame per bit)
 extern const size_t heap;
@@ -16,7 +16,7 @@ static size_t kalloc_next_frame(void);
 
 void kalloc_init(void)
 {
-    memset(frame_map, FRAME_FREE, sizeof(frame_map));
+    memset(frame_map, FREE, sizeof(frame_map));
 }
 
 size_t kalloc_frame(void)
@@ -37,7 +37,7 @@ size_t kalloc_frame(void)
     }
 
     size_t frame = pre_frames[p_frame];
-    ++p_frame; // Next frame
+    ++p_frame;    // Next frame
     return frame; // Return first free frame
 }
 
@@ -52,11 +52,11 @@ static size_t kalloc_next_frame(void)
             ++p_frame; // Next frame
         }
         if (p_frame == NUM_HEAP_PAGES) {
-            return ERROR_FAILURE; // Heap full
+            return 0; // Heap full (null address)
         }
     }
 
-    frame_map[p_frame] |= FRAME_USED << bit; // Mark frame as used
+    frame_map[p_frame] |= USED << bit;   // Mark frame as used
     return heap + (p_frame * PAGE_SIZE); // Return the address of the next frame
 }
 
@@ -64,5 +64,5 @@ void kfree_frame(size_t frame)
 {
     frame -= heap; // Get offset from the first frame on the heap
     size_t p_frame = frame / PAGE_SIZE;
-    frame_map[p_frame] = FRAME_FREE;
+    frame_map[p_frame] = FREE;
 }

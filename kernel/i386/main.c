@@ -6,7 +6,7 @@
 #include <kernel/i386/cpu/gdt.h>
 #include <kernel/i386/cpu/idt.h>
 #include <kernel/i386/cpu/tss.h>
-#include <kernel/i386/mm/alloc.h>
+#include <kernel/i386/mm/init.h>
 #include <kernel/i386/mm/paging.h>
 #include <stdio.h>
 

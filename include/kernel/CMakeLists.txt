@@ -3,8 +3,8 @@
 target_sources(Kernel PUBLIC FILE_SET HEADERS
         FILES
         console.h
-        defs.h
         error.h
+        mm.h
         version.h
 )
 

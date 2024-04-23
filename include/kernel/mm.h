@@ -1,10 +1,10 @@
+// Virtual memory manager
 // Copyright (c) 2024 Natalie Wiggins. All rights reserved.
 // SPDX-License-Identifier: GPL-3.0-only
 
 #pragma once
 
-typedef int error_t;
-enum {
-    ERROR_SUCCESS = 0,
-    ERROR_FAILURE = -1
-};
+#include <stddef.h>
+
+void *kmalloc(size_t size);
+void kfree(void *ptr);

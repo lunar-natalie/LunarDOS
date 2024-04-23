@@ -1,7 +1,10 @@
 // Copyright (c) 2024 Natalie Wiggins. All rights reserved.
 // SPDX-License-Identifier: GPL-3.0-only
 
+#include <stdlib.h>
 #include <string.h>
+
+#include <kernel/mm.h>
 
 void *memset(void *dest, int ch, size_t count)
 {
@@ -20,4 +23,12 @@ void *memcpy(void *restrict dest, const void *restrict src, size_t count)
         ch_dest[i] = ch_src[i];
     }
     return dest;
+}
+
+void *malloc(size_t size)
+{
+}
+
+void free(void *ptr)
+{
 }
