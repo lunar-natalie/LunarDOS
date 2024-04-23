@@ -46,12 +46,12 @@ static size_t kalloc_next_frame(void)
     size_t p_frame = 0;
     uint8_t bit = 0;
     while ((frame_map[p_frame] | bit) == 0) {
-        ++bit;
+        ++bit; // Next bit
         if (bit == sizeof(uint8_t)) {
-            ++p_frame;
+            ++p_frame; // Next frame
         }
         if (p_frame == NUM_HEAP_PAGES) {
-            return ERROR_FAILURE;
+            return ERROR_FAILURE; // Heap full
         }
     }
 
