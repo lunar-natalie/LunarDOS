@@ -19,6 +19,13 @@ enum {
     PRE_FRAME_LIMIT = 20
 };
 
+// Initializes the kernel heap frame map
 void kalloc_init(void);
+
+// Allocates a frame on the kernel heap
+// Returns the start address of the allocated frame, or ERROR_FAILURE if the heap is full
 size_t kalloc_frame(void);
+
+// Marks the pages in the given frame as free on the kernel heap
+// frame - Start address of a frame previously allocated on the heap
 void kfree_frame(size_t frame);

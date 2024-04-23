@@ -35,9 +35,9 @@ size_t kalloc_frame(void)
         alloc = false;
     }
 
-    size_t frame = pre_frames[p_frame]; // Return first free frame
+    size_t frame = pre_frames[p_frame];
     ++p_frame; // Next frame
-    return frame;
+    return frame; // Return first free frame
 }
 
 static size_t kalloc_next_frame(void)
