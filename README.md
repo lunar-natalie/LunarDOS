@@ -3,6 +3,8 @@
 ![CMake](https://github.com/lunar-natalie/LunarDOS/actions/workflows/cmake.yml/badge.svg)
 ![Linter](https://github.com/lunar-natalie/LunarDOS/actions/workflows/linter.yml/badge.svg)
 
+Monolithic kernel and libc implementation
+
 ## Build Requirements
 
 - [CMake](https://cmake.org/) >= 3.27
