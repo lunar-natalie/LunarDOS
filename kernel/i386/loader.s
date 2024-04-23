@@ -23,7 +23,7 @@ stack_base:
 .skip 16384
 stack_top:
 
-// Entrypoint
+// Entry point
 .section .text
 .global _start
 .type _start, @function
