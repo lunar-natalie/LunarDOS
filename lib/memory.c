@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <kernel/mm.h>
+#include <kernel/vm.h>
 
 void *memset(void *dest, int ch, size_t count)
 {
