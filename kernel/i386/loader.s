@@ -1,4 +1,4 @@
-// Multiboot v1-compatible kernel bootstrap assembly
+// Multiboot v1 kernel loader
 // Copyright (c) 2024 Natalie Wiggins. All rights reserved.
 // SPDX-License-Identifier: GPL-3.0-or-later
 

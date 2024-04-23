@@ -26,11 +26,4 @@ enum PAGE_TABLE_FLAG {
     PAGE_TABLE_FLAG_G = 1 << 8    // Global
 };
 
-enum {
-    NUM_CODE_PAGES = 0x300,
-    NUM_HEAP_PAGES = 0x100,
-    NUM_PAGES = NUM_CODE_PAGES + NUM_HEAP_PAGES,
-    PAGE_SIZE = 0x1000
-};
-
 void paging_init(void);

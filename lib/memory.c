@@ -27,8 +27,10 @@ void *memcpy(void *restrict dest, const void *restrict src, size_t count)
 
 void *malloc(size_t size)
 {
+    return kmalloc(size);
 }
 
 void free(void *ptr)
 {
+    return kfree(ptr);
 }

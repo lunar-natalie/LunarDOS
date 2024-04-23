@@ -4,25 +4,16 @@
 #include <kernel/i386/mm/frame.h>
 
 #include <stdbool.h>
-#include <stdint.h>
-#include <string.h>
 
-// 1M heap of 4K pages split into 8 frames per map entry (1 frame per bit)
-extern const size_t heap;
-uint8_t frame_map[NUM_HEAP_PAGES / sizeof(uint8_t)];
-size_t pre_frames[NUM_HEAP_PAGES];
+static uint8_t frame_map[FRAME_MAP_SIZE];
 
 static size_t kalloc_next_frame(void);
-
-void kalloc_init(void)
-{
-    memset(frame_map, FREE, sizeof(frame_map));
-}
 
 size_t kalloc_frame(void)
 {
     static bool alloc = true;
     static size_t p_frame = 0;
+    static size_t pre_frames[NUM_HEAP_PAGES];
 
     // Allocate a new set of pre-frames every 20 pages
     if (p_frame == PRE_FRAME_LIMIT) {
@@ -44,20 +35,20 @@ size_t kalloc_frame(void)
 static size_t kalloc_next_frame(void)
 {
     // Traverse frame map
-    size_t p_frame = 0;
+    size_t p_entry = 0;
     uint8_t bit = 0;
-    while ((frame_map[p_frame] | bit) == 0) {
-        ++bit; // Next bit
+    while ((frame_map[p_entry] | bit) == 0) {
+        ++bit;
         if (bit == sizeof(uint8_t)) {
-            ++p_frame; // Next frame
+            ++p_entry;
         }
-        if (p_frame == NUM_HEAP_PAGES) {
+        if (p_entry == sizeof(frame_map)) {
             return 0; // Heap full (null address)
         }
     }
 
-    frame_map[p_frame] |= USED << bit;   // Mark frame as used
-    return heap + (p_frame * PAGE_SIZE); // Return the address of the next frame
+    frame_map[p_entry] |= USED << bit;         // Mark frame as used
+    return heap + (p_entry * bit * PAGE_SIZE); // Return the address of the next frame
 }
 
 void kfree_frame(size_t frame)

@@ -1,7 +1,7 @@
 // Copyright (c) 2024 Natalie Wiggins. All rights reserved.
 // SPDX-License-Identifier: GPL-3.0-only
 
-#include <number.h>
+#include <utils/number.h>
 
 #include <limits.h>
 

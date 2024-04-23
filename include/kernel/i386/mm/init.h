@@ -3,5 +3,5 @@
 
 #pragma once
 
-// Initializes the kernel heap frame map
+// Initializes the frame map for the kernel heap
 void kalloc_init(void);
