@@ -7,11 +7,11 @@
 #include <string.h>
 #include <stdbool.h>
 
-static size_t kalloc_next_frame(void);
-
 extern const size_t heap;
 uint8_t frame_map[NUM_FRAME_PAGES];
 size_t pre_frames[NUM_HEAP_PAGES];
+
+static size_t kalloc_next_frame(void);
 
 void kalloc_init(void)
 {
