@@ -5,6 +5,7 @@ target_sources(Kernel PUBLIC FILE_SET HEADERS
         cpu/cr.h
         cpu/gdt.h
         cpu/idt.h
+        cpu/isr.h
         cpu/tss.h
         mm/defs.h
         mm/frame.h

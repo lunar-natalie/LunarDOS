@@ -15,17 +15,23 @@ isr_stub_\i:
 .macro isr_exception_stub i
 .align 4
 isr_stub_\i:
-	cld			// DF must be clear on function entry
+	pushl	$0		// Error code
+	pushw	$\i		// ISR
+	cld			// Clear DF before function entry
 	call	exception_handler
+
+	sub	$12, %esp	// Pop error code and ISR
 	iret
 .endm
 
 .macro isr_exception_error_stub i
 .align 4
 isr_stub_\i:
-	cld
+	pushw	$\i		// ISR
+	cld			// Clear DF before function entry
 	call	exception_handler
-	sub	$8, %esp	// Pop error code
+
+	sub	$12, %esp	// Pop error code and ISR
 	iret
 .endm
 
