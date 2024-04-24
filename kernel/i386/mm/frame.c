@@ -22,10 +22,10 @@ void init_page_frames(void)
 size_t alloc_frame(void)
 {
     static bool alloc = true;
-    static size_t p_frame = 0;
+    static size_t frame_index = 0;
 
     // Allocate a new set of pre-frames every 20 pages
-    if (p_frame == PRE_FRAME_LIMIT) {
+    if (frame_index == PRE_FRAME_LIMIT) {
         alloc = true;
     }
     if (alloc) {
@@ -35,44 +35,41 @@ size_t alloc_frame(void)
                 return 0; // Failed to allocate
             }
         }
-        p_frame = 0;
+        frame_index = 0;
         alloc = false;
     }
 
-    size_t frame = pre_frames[p_frame]; // Address of the first free frame
-    ++p_frame;                          // Next frame
+    size_t frame = pre_frames[frame_index]; // Address of the first free frame
+    ++frame_index;                          // Next frame
     return frame;
 }
 
 static size_t alloc_next_frame(void)
 {
-    size_t p_entry = 0;
-    uint8_t bit = 0;
-
     // Traverse the bitmap for the next free frame
-    while ((frame_map[p_entry] | bit) == 0) {
+    size_t entry_index = 0;
+    uint8_t bit = 0;
+    while ((frame_map[entry_index] | bit) == 0) {
         ++bit;
         if (bit == sizeof(uint8_t)) {
-            ++p_entry;
+            ++entry_index;
         }
-        if (p_entry == sizeof(frame_map)) {
+        if (entry_index == sizeof(frame_map)) {
             return 0; // Heap full
         }
     }
 
-    frame_map[p_entry] |= 1 << bit;            // Mark frame as used
-    return heap + (p_entry * bit * PAGE_SIZE); // Return the address
+    frame_map[entry_index] |= 1 << bit;            // Mark frame as used
+    return heap + (entry_index * bit * PAGE_SIZE); // Return the address
 }
 
 void free_frame(size_t frame)
 {
-    size_t p_entry;
-    uint8_t bit;
+    frame -= heap;      // Get offset from the first frame on the heap
+    frame /= PAGE_SIZE; // Get index from address
 
-    frame -= heap;                             // Get offset from the first frame on the heap
-    frame /= PAGE_SIZE;                        // Get index from address
-    p_entry = frame / sizeof(uint8_t);         // Entry index is the frame index to the nearest 8 pages
-    bit = frame - (p_entry * sizeof(uint8_t)); // Bit number within the entry is the remainder of integer division
+    size_t entry_index = frame / sizeof(uint8_t);          // Frame index to the nearest 8 pages
+    uint8_t bit = frame - (entry_index * sizeof(uint8_t)); // Remainder of integer division
 
-    frame_map[p_entry] &= ~(1 << bit); // Mark frame as free
+    frame_map[entry_index] &= ~(1 << bit); // Mark frame as free
 }
