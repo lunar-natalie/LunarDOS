@@ -12,8 +12,8 @@ int printf(const char *restrict format, ...)
 
     va_start(args, format);
     ret = vprintf(format, args);
-    va_end(args);
 
+    va_end(args);
     return ret;
 }
 
@@ -70,5 +70,6 @@ int vprintf(const char *restrict format, va_list vlist) // NOLINT
         }
         ++format;
     }
+
     return ret;
 }

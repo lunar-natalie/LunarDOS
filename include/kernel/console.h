@@ -6,5 +6,6 @@
 #include <stddef.h>
 
 void console_init(void);
+
 void putc(char ch);
 size_t puts(const char *str);
