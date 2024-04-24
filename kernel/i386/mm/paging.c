@@ -6,7 +6,7 @@
 #include <kernel/i386/cpu/cr.h>
 #include <kernel/i386/mm/defs.h>
 
-// Identity paging setup for the first 4M, split into 4K pages
+// Identity paging for the first 4M, split into 4K pages
 static uint32_t page_directory[NUM_PAGES] __attribute__((aligned(PAGE_SIZE)));
 static uint32_t page_table[NUM_PAGES] __attribute__((aligned(PAGE_SIZE)));
 
