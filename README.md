@@ -3,7 +3,7 @@
 ![CMake](https://github.com/lunar-natalie/LunarDOS/actions/workflows/cmake.yml/badge.svg)
 ![Linter](https://github.com/lunar-natalie/LunarDOS/actions/workflows/linter.yml/badge.svg)
 
-Monolithic kernel and libc implementation
+Monolithic kernel and libc implementation written in C11 and Assembly
 
 ## Build Requirements
 
@@ -31,7 +31,7 @@ Development tools:
 |------------|--------------|------------------------------------|
 | `i686-elf` | `i386`       | `i686-elf-gcc` `i686-elf-binutils` |
 
-A [Docker image](https://github.com/lunar-natalie/os-build) is also provided with a toolchain for `i686-elf` builds.
+A [Docker image](https://github.com/lunar-natalie/os-build) is provided containing a toolchain for `i686-elf` builds.
 
 ## Building
 
