@@ -3,5 +3,13 @@
 
 #pragma once
 
+#include <stddef.h>
+#include <stdbool.h>
+
+typedef struct {
+    size_t base;
+    size_t size;
+} block_t;
+
 // Initializes the virtual memory manager
 void init_vm(void);

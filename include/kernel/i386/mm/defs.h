@@ -14,8 +14,3 @@ enum {
     // Maximum number of frames which can be allocated before allocating a new set of pre-frames
     PRE_FRAME_LIMIT = 20
 };
-
-typedef struct {
-    void *ptr;
-    size_t size;
-} block_t;
