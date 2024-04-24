@@ -16,7 +16,7 @@
 .long FLAGS
 .long CHECKSUM
 
-// Stack (16K, 16-byte aligned)
+// Stack (16K)
 .section .bss
 .align 16
 stack_base:
