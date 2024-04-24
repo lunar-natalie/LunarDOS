@@ -6,7 +6,7 @@
 #include <kernel/i386/cpu/gdt.h>
 #include <string.h>
 
-static uint8_t idt[IDT_SIZE] __attribute__((aligned(IDT_ENTRY_SIZE)));
+static uint8_t __attribute__((aligned(IDT_ENTRY_SIZE))) idt[IDT_SIZE];
 extern uint32_t isr_stub_table[IDT_NUM_ENTRIES];
 
 void idt_init(void)

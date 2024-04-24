@@ -26,4 +26,5 @@ enum PAGE_TABLE_FLAG {
     PAGE_TABLE_FLAG_G = 1 << 8    // Global
 };
 
+// Sets up identity paging for the first 4M of the address space
 void paging_init(void);

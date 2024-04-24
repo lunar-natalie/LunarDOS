@@ -8,7 +8,7 @@
 
 // Flat GDT mapping where the entire virtual address space is mapped for each segment
 // Consists of the null descriptor, two kernel segments, two userspace segments and the kernel TSS
-static uint8_t gdt[GDT_SIZE] __attribute__((aligned(GDT_ENTRY_SIZE)));
+static uint8_t __attribute__((aligned(GDT_ENTRY_SIZE))) gdt[GDT_SIZE];
 
 void gdt_init(const tss_t *tss)
 {

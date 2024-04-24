@@ -7,19 +7,19 @@
 
 int printf(const char *restrict format, ...)
 {
-    int result = 0;
+    int ret;
     va_list args;
 
     va_start(args, format);
-    result = vprintf(format, args);
+    ret = vprintf(format, args);
     va_end(args);
 
-    return result;
+    return ret;
 }
 
 int vprintf(const char *restrict format, va_list vlist) // NOLINT
 {
-    int result = 0;
+    int ret = 0;
     while (*format != '\0') {
         if (*format == '%') {
             // Format specifier
@@ -29,12 +29,12 @@ int vprintf(const char *restrict format, va_list vlist) // NOLINT
             if (spec == 'c') {
                 int value = va_arg(vlist, int);
                 putc(value);
-                ++result;
+                ++ret;
             }
             // string
             else if (spec == 's') {
                 char *value = va_arg(vlist, char *);
-                result += puts(value);
+                ret += puts(value);
             }
             // int (unimplemented)
             else if (spec == 'd' || spec == 'i') {
@@ -47,28 +47,28 @@ int vprintf(const char *restrict format, va_list vlist) // NOLINT
                 //        ++buffer;
                 //    }
                 //    itoa(value, buffer, 10);
-                //    result += puts(buffer);
+                //    ret += puts(buffer);
             }
             // octal (unimplemented)
             else if (spec == 'o') {
                 //    unsigned int value = va_arg(vlist, unsigned int);
                 //    char *buffer = ...
                 //    itoa(value, buffer, 8);
-                //    result += puts(buffer);
+                //    ret += puts(buffer);
             }
             // hex (unimplemented)
             else if (spec == 'x') {
                 //    unsigned int value = va_arg(vlist, unsigned int);
                 //    char *buffer = ...
                 //    itoa(value, buffer, 16);
-                //    result += puts(buffer);
+                //    ret += puts(buffer);
             }
         }
         else {
             putc(*format);
-            ++result;
+            ++ret;
         }
         ++format;
     }
-    return result;
+    return ret;
 }
