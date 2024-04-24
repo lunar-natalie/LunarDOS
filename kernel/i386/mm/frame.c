@@ -16,7 +16,7 @@ static size_t pre_frames[NUM_HEAP_PAGES];
 
 void init_page_frames(void)
 {
-    memset(frame_map, FREE, sizeof(frame_map));
+    memset(frame_map, 0, sizeof(frame_map));
 }
 
 size_t alloc_frame(void)
@@ -46,9 +46,10 @@ size_t alloc_frame(void)
 
 static size_t alloc_next_frame(void)
 {
-    // Traverse frame map
     size_t p_entry = 0;
     uint8_t bit = 0;
+
+    // Traverse the bitmap for the next free frame
     while ((frame_map[p_entry] | bit) == 0) {
         ++bit;
         if (bit == sizeof(uint8_t)) {
@@ -59,13 +60,19 @@ static size_t alloc_next_frame(void)
         }
     }
 
-    frame_map[p_entry] |= USED << bit;         // Mark frame as used
-    return heap + (p_entry * bit * PAGE_SIZE); // Return the address of the next frame
+    frame_map[p_entry] |= 1 << bit;            // Mark frame as used
+    return heap + (p_entry * bit * PAGE_SIZE); // Return the address
 }
 
 void free_frame(size_t frame)
 {
-    frame -= heap; // Get offset from the first frame on the heap
-    size_t p_frame = frame / PAGE_SIZE;
-    frame_map[p_frame] = FREE;
+    size_t p_entry;
+    uint8_t bit;
+
+    frame -= heap;                             // Get offset from the first frame on the heap
+    frame /= PAGE_SIZE;                        // Get index from address
+    p_entry = frame / sizeof(uint8_t);         // Entry index is the frame index to the nearest 8 pages
+    bit = frame - (p_entry * sizeof(uint8_t)); // Bit number within the entry is the remainder of integer division
+
+    frame_map[p_entry] &= ~(1 << bit); // Mark frame as free
 }
