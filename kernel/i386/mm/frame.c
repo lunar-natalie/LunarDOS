@@ -39,7 +39,7 @@ size_t alloc_frame(void)
         alloc = false;
     }
 
-    size_t frame = pre_frames[p_frame]; // First free frame
+    size_t frame = pre_frames[p_frame]; // Address of the first free frame
     ++p_frame;                          // Next frame
     return frame;
 }
