@@ -3,5 +3,6 @@ modernize-*,
 performance-*,
 portability-*,
 readability-*,
+-performance-no-int-to-ptr,
 -readability-identifier-length,
 -readability-magic-numbers'

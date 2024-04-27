@@ -1,4 +1,4 @@
-// Page frame allocator
+// Physical memory manager
 // Copyright (c) 2024 Natalie Wiggins. All rights reserved.
 // SPDX-License-Identifier: GPL-3.0-only
 
@@ -7,8 +7,8 @@
 #include <kernel/i386/mm/defs.h>
 #include <stddef.h>
 
-// Initializes the frame map for the kernel heap
-void init_page_frames(void);
+// Initializes the kernel page frame allocator
+void pm_init(void);
 
 // Allocates a frame on the kernel heap
 // Returns the base address of the allocated frame, or 0 if allocation failed

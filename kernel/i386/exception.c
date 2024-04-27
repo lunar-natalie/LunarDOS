@@ -6,7 +6,7 @@
 #include <kernel/i386/cpu/isr.h>
 #include <stdint.h>
 
-void exception_handler(uint16_t isr, uint32_t error)
+void exception_handler(uint16_t isr, __attribute__((unused)) uint32_t error)
 {
     switch (isr) {
     case DIVISION_ERROR:

@@ -8,9 +8,8 @@ target_sources(Kernel PUBLIC FILE_SET HEADERS
         cpu/isr.h
         cpu/tss.h
         mm/defs.h
-        mm/frame.h
-        mm/init.h
         mm/paging.h
+        mm/pm.h
         mm/vm.h
         vga.h
 )

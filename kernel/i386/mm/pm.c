@@ -1,7 +1,7 @@
 // Copyright (c) 2024 Natalie Wiggins. All rights reserved.
 // SPDX-License-Identifier: GPL-3.0-only
 
-#include <kernel/i386/mm/frame.h>
+#include <kernel/i386/mm/pm.h>
 
 #include <stdbool.h>
 #include <stdint.h>
@@ -14,7 +14,7 @@ extern const size_t heap;
 static uint8_t frame_map[NUM_HEAP_PAGES / sizeof(uint8_t)];
 static size_t pre_frames[NUM_HEAP_PAGES];
 
-void init_page_frames(void)
+void pm_init(void)
 {
     memset(frame_map, 0, sizeof(frame_map));
 }
