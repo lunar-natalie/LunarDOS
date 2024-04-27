@@ -5,7 +5,7 @@ target_sources(Libc PUBLIC FILE_SET HEADERS
         stdio.h
         stdlib.h
         string.h
-        utils/number.h
+        utils.h
 )
 
 add_subdirectory(kernel)

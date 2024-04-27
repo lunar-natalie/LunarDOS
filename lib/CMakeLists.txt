@@ -4,7 +4,7 @@ add_library(Libc
         memory.c
         printf.c
         string.c
-        utils/number.c
+        utils.c
 )
 
 set_target_properties(Libc PROPERTIES

@@ -1,3 +1,4 @@
+// Memory management
 // Copyright (c) 2024 Natalie Wiggins. All rights reserved.
 // SPDX-License-Identifier: GPL-3.0-only
 
@@ -5,6 +6,5 @@
 
 #include <stddef.h>
 
-// Unimplemented
 void *kmalloc(size_t size);
 void kfree(void *ptr);
