@@ -7,7 +7,7 @@
 #include <kernel/i386/mm/defs.h>
 #include <stddef.h>
 
-// Initializes the kernel page frame allocator
+// Initializes the page frame allocator
 void pm_init(void);
 
 // Allocates a frame on the kernel heap
